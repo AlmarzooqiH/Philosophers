@@ -6,13 +6,14 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:18:08 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/11 16:23:22 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/11 17:23:38 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 # include <pthread.h>
+
 /**
  * @brief Structure to hold the information of the philosophers.
  * @var id The id of the philosopher.
@@ -24,19 +25,20 @@
  * @var mss milliseconds when he started sleeping.
  * @var mst milliseconds when he started thinking.
  * @var msd milliseconds when he died.
+ * @var mfork The mutex fork of the philosopher.
  */
 typedef struct s_philo
 {
-	
-	int			id;
-	pthread_t	tid;
-	int			lh;
-	int			rh;
-	long		mstf;
-	long		mse;
-	long		mss;
-	long		mst;
-	long		msd;
+	int				id;
+	pthread_t		tid;
+	int				lh;
+	int				rh;
+	long			mstf;
+	long			mse;
+	long			mss;
+	long			mst;
+	long			msd;
+	pthread_mutex_t	mfork;
 }	t_philo;
 
 /**

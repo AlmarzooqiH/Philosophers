@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/11 15:43:29 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/11 17:24:14 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	free_prog(t_prog *prog)
 			prog->philo[i].mss = 0;
 			prog->philo[i].mst = 0;
 			prog->philo[i].msd = 0;
+			pthread_mutex_destroy(&prog->philo[i].mfork);
 			i++;
 		}
 		free(prog->philo);
@@ -68,6 +69,8 @@ int	init_philo(t_prog *prog)
 		prog->philo[i].mss = 0;
 		prog->philo[i].mst = 0;
 		prog->philo[i].msd = 0;
+		if (pthread_mutex_init(&prog->philo[i].mfork, NULL) != 0)
+			return (printf("Failed to init mutex fork\n"), 1);
 		i++;
 	}
 	return (0);
