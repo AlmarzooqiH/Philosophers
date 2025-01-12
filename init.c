@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/11 17:24:14 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/12 04:37:15 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ int	init_philo(t_prog *prog)
 		prog->philo[i].id = i + 1;
 		prog->philo[i].lh = 0;
 		prog->philo[i].rh = 0;
+		prog->philo[i].es = 0;
+		prog->philo[i].ts = 0;
+		prog->philo[i].ss = 0;
+		prog->philo[i].ds = 0;
 		prog->philo[i].mstf = 0;
 		prog->philo[i].mse = 0;
 		prog->philo[i].mss = 0;

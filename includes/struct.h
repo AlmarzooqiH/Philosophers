@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:18:08 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/11 17:23:38 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/12 04:28:46 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
  * var	tid The thread id of the philosopher.
  * @var lh The status of the left hand. (If it has the fork).
  * @var rh The status of the right hand. (If it has the fork).
+ * @var es The eating status of the philosopher.
+ * @var ts The thinking status of the philosopher.
+ * @var ss The sleeping status of the philosopher.
+ * @var ds The dying status of the philosopher.
  * @var mstf milliseconds when he took the fork.
  * @var mse milliseconds when he started eating.
  * @var mss milliseconds when he started sleeping.
@@ -33,6 +37,10 @@ typedef struct s_philo
 	pthread_t		tid;
 	int				lh;
 	int				rh;
+	int				es;
+	int				ts;
+	int				ss;
+	int				ds;
 	long			mstf;
 	long			mse;
 	long			mss;

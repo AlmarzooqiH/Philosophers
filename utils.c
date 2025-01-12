@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 20:49:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/11 17:41:25 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/12 02:39:29 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ long	ft_atol(const char *str)
 	while ((*str >= 9 && *str <= 13) || *str == 32)
 		str++;
 	if (*str == '-')
-	{
+	{	
 		sign = -1;
 		str++;
 	}
@@ -84,7 +84,7 @@ int	ft_isonlyspace(const char *s)
 // 	printf("====================================\nprog->philo data: \n");
 // 	for (int i = 0; i < prog->n_philo; i++)
 // 	{
-// 		printf("Philosopher %d:\n", prog->philo[i].id);
+// 		printf("Philjosopher %d:\n", prog->philo[i].id);
 // 		printf("  Thread ID: %lu\n", prog->philo[i].tid);
 // 		printf("  Left hand: %d\n", prog->philo[i].lh);
 // 		printf("  Right hand: %d\n", prog->philo[i].rh);
