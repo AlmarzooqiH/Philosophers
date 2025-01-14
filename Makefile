@@ -12,7 +12,7 @@ mandatory: $(MANDATORY_OBJS)
 debug: re $(MANDATORY_OBJS)
 	$(COMPILER) $(FLAGS) $(DEBUG_FLAGS) $(MANDATORY_OBJS) $(LIBFT_A) $(READLINE_FLAG) -o $(PROGRAM_NAME)
 clean:
-	rm -rf *.o *.out *.gch .vscode *.txt
+	rm -rf *.o *.out *.gch .vscode *.txt *.log
 
 fclean: clean
 	rm -rf $(PROGRAM_NAME)
