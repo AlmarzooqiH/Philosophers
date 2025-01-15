@@ -6,13 +6,15 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:18:08 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/15 09:18:51 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/15 16:03:49 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCT_H
 # define STRUCT_H
 # include <pthread.h>
+
+typedef struct s_prog	t_prog;
 
 /**
  * @brief Structure to hold the information of the philosophers.
@@ -46,7 +48,7 @@ typedef struct s_philo
 	long			mss;
 	long			mst;
 	long			msd;
-	pthread_mutex_t	mfork;
+	t_prog			*prog;
 }	t_philo;
 
 /**
@@ -61,14 +63,15 @@ typedef struct s_philo
  */
 typedef struct s_prog
 {
-	int			n_philo;
-	long		time;
-	long		td;
-	long		te;
-	long		ts;
-	int			neat;
-	pthread_t	monitor;
-	t_philo		*philo;
+	int				n_philo;
+	long			time;
+	long			td;
+	long			te;
+	long			ts;
+	int				neat;
+	pthread_t		monitor;
+	pthread_mutex_t	*forks;
+	t_philo			*philo;
 }	t_prog;
 
 #endif
