@@ -2,7 +2,7 @@ PROGRAM_NAME = philo
 COMPILER = cc
 FLAGS = -Wall -Wextra -Werror
 DEBUG_FLAGS = -fsanitize=address,undefined -Werror=address -Wnull-dereference -g
-MANDATORY = main.c init.c utils.c utils2.c validate.c
+MANDATORY = main.c init.c init2.c utils.c utils2.c validate.c philo_activites.c
 MANDATORY_OBJS = $(MANDATORY:.c=.o)
 all: mandatory
 
