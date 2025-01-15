@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/11 17:42:35 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/15 06:00:50 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include "struct.h"
 
 // void	print_data(t_prog *prog);
+void	ft_bzero(void *s, size_t n);
+void	*ft_calloc(size_t count, size_t size);
 size_t	ft_strlen(const char *str);
 int		ft_isdigit(int c);
 long	ft_atol(const char *str);
