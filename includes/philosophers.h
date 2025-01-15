@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/15 06:24:38 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/15 09:19:08 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 # include <sys/time.h>
 # include <limits.h>
 # include "struct.h"
-
-# define FTT "Failed to start threads\n\0"
+# include "error.h"
 
 // void	print_data(t_prog *prog);
 void	ft_bzero(void *s, size_t n);

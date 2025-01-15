@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 20:51:21 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/11 16:16:05 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/15 09:21:56 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	validate2(char *str)
 			continue ;
 		}
 		if (!ft_isdigit(str[i]))
-			return (printf("Characters are not allowed\n"), 1);
+			return (printf("%s", CANA), 1);
 		i++;
 	}
 	return (0);
@@ -41,14 +41,14 @@ int	validate(int ac, char **av)
 		while (i < ac)
 		{
 			if (ft_isonlyspace(av[i]) || av[i][0] == '\0')
-				return (printf("Empty argument\n"), 1);
+				return (printf("%s", EA), 1);
 			if (validate2(av[i]))
 				return (1);
 			if (atol(av[i]) < 0 || atol(av[i]) > INT_MAX)
-				return (printf("Number should be > 0 and < INT_MAX\n"), 1);
+				return (printf("%s", OFB), 1);
 			i++;
 		}
 		return (0);
 	}
-	return (printf("Invalid size arguments\n"), 1);
+	return (printf("%s", IAS), 1);
 }

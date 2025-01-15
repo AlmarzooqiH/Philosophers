@@ -6,12 +6,17 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/15 06:22:58 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/15 09:35:27 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philosophers.h"
 
+/**
+ * @brief This function is responsible on freeing the t_prog data.
+ * @param prog The t_prog that we want to free.
+ * @return Void.
+ */
 void	free_prog2(t_prog *prog)
 {
 	if (prog)
@@ -27,6 +32,11 @@ void	free_prog2(t_prog *prog)
 	}
 }
 
+/**
+ * @brief This function is responsible on freeing the t_prog data.
+ * @param prog The t_prog that we want to free.
+ * @return Void.
+ */
 void	free_prog(t_prog *prog)
 {
 	int	i;
@@ -53,6 +63,13 @@ void	free_prog(t_prog *prog)
 	free_prog2(prog);
 }
 
+/**
+ * @brief This functiom is resposible to init the t_philo struct.
+ * @param prog The t_prog that we want to initalize.
+ * @return 0 On success.
+ * @return 1 on Failure.
+ */
+
 int	init_philo(t_prog *prog)
 {
 	int	i;
@@ -75,12 +92,20 @@ int	init_philo(t_prog *prog)
 		prog->philo[i].mst = 0;
 		prog->philo[i].msd = 0;
 		if (pthread_mutex_init(&prog->philo[i].mfork, NULL) != 0)
-			return (printf("Failed to init mutex fork\n"), 1);
+			return (printf("%s", FTIM), 1);
 		i++;
 	}
 	return (0);
 }
 
+/**
+ * @brief This functiom is resposible to init the t_prog struct.
+ * @param ac Argument count.
+ * @param av Arguments.
+ * @param prog The t_prog that we want to initalize.
+ * @return 0 On success.
+ * @return 1 on Failure.
+ */
 int	init(int ac, char **av, t_prog *prog)
 {
 	int		i;
@@ -96,8 +121,8 @@ int	init(int ac, char **av, t_prog *prog)
 		prog->neat = -1;
 	prog->philo = (t_philo *)ft_calloc((prog->n_philo), sizeof(t_philo));
 	if (!prog->philo)
-		return (printf("Failed to malloc t_philo\n"), free_prog(prog), 1);
+		return (printf("%s", FTCP), free_prog(prog), 1);
 	if (init_philo(prog))
-		return (printf("Failed to init t_philo\n"), free_prog(prog), 1);
+		return (printf("%s", FTIP), free_prog(prog), 1);
 	return (0);
 }

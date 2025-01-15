@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:18:08 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/12 04:28:46 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/15 09:18:51 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,14 @@ typedef struct s_philo
  */
 typedef struct s_prog
 {
-	int		n_philo;
-	long	time;
-	long	td;
-	long	te;
-	long	ts;
-	int		neat;
-	t_philo	*philo;
+	int			n_philo;
+	long		time;
+	long		td;
+	long		te;
+	long		ts;
+	int			neat;
+	pthread_t	monitor;
+	t_philo		*philo;
 }	t_prog;
 
 #endif
