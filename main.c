@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/15 10:12:04 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/15 16:11:05 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ void	*simu(void *arg)
 	t_philo	philo;
 
 	philo = *(t_philo *)arg;
+	while (1)
+	{
+		eat(philo);
+		think(philo);
+		psleep(philo);
+	}
 	return (NULL);
 }
 
