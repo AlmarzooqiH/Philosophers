@@ -6,11 +6,35 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/15 09:35:27 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/15 16:02:37 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philosophers.h"
+
+/**
+ * @brief This function will initalize the fork mutexes.
+ * @param prog The t_prog struct.
+ * @return 0 On Success.
+ * @return 1 On Failure.
+ */
+int	init_forks(t_prog *prog)
+{
+	int	i;
+
+	prog->forks = (pthread_mutex_t *)ft_calloc(prog->n_philo,
+			sizeof(pthread_mutex_t));
+	if (!prog->forks)
+		return (printf("%s", FTIP), free_prog(prog), 1);
+	i = 0;
+	while (i < prog->n_philo)
+	{
+		if (pthread_mutex_init(&prog->forks[i], NULL))
+			return (printf("%s", FTIP), free_prog(prog), 1);
+		i++;
+	}
+	return (0);
+}
 
 /**
  * @brief This function is responsible on freeing the t_prog data.
@@ -21,6 +45,12 @@ void	free_prog2(t_prog *prog)
 {
 	if (prog)
 	{
+		if (prog->forks)
+		{
+			destroy_forks(prog);
+			free(prog->forks);
+			prog->forks = NULL;
+		}
 		prog->n_philo = 0;
 		prog->td = 0;
 		prog->te = 0;
@@ -54,7 +84,6 @@ void	free_prog(t_prog *prog)
 			prog->philo[i].mss = 0;
 			prog->philo[i].mst = 0;
 			prog->philo[i].msd = 0;
-			pthread_mutex_destroy(&prog->philo[i].mfork);
 			i++;
 		}
 		free(prog->philo);
@@ -91,8 +120,7 @@ int	init_philo(t_prog *prog)
 		prog->philo[i].mss = 0;
 		prog->philo[i].mst = 0;
 		prog->philo[i].msd = 0;
-		if (pthread_mutex_init(&prog->philo[i].mfork, NULL) != 0)
-			return (printf("%s", FTIM), 1);
+		prog->philo[i].prog = prog;
 		i++;
 	}
 	return (0);
