@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/15 09:19:08 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/15 16:14:11 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,15 @@ long	ft_atol(const char *str);
 int		ft_isspace(int c);
 int		validate(int ac, char **av);
 int		validate2(char *str);
+void	free_prog2(t_prog *prog);
 void	free_prog(t_prog *prog);
+int		init_forks(t_prog *prog);
+void	destroy_forks(t_prog *prog);
 int		init(int ac, char **av, t_prog *prog);
 int		ft_isonlyspace(const char *s);
+void	*simu(void *arg);
+int		start_threads(t_prog *prog);
+void	eat(t_philo philo);
+void	think(t_philo philo);
+void	psleep(t_philo philo);
 #endif
