@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/15 16:02:37 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/18 14:05:11 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	free_prog2(t_prog *prog)
 		prog->ts = 0;
 		prog->neat = 0;
 		prog->time = 0;
+		pthread_detach(prog->monitor);
 		free(prog);
 		prog = NULL;
 	}
@@ -84,6 +85,8 @@ void	free_prog(t_prog *prog)
 			prog->philo[i].mss = 0;
 			prog->philo[i].mst = 0;
 			prog->philo[i].msd = 0;
+			prog->philo[i].tse = 0;
+			pthread_detach(prog->philo[i].tid);
 			i++;
 		}
 		free(prog->philo);
@@ -120,6 +123,7 @@ int	init_philo(t_prog *prog)
 		prog->philo[i].mss = 0;
 		prog->philo[i].mst = 0;
 		prog->philo[i].msd = 0;
+		prog->philo[i].tse = 0;
 		prog->philo[i].prog = prog;
 		i++;
 	}
@@ -142,6 +146,7 @@ int	init(int ac, char **av, t_prog *prog)
 	prog->td = ft_atol(av[2]);
 	prog->te = ft_atol(av[3]);
 	prog->ts = ft_atol(av[4]);
+	prog->status = 0;
 	prog->time = 0;
 	if (ac == 6)
 		prog->neat = ft_atol(av[5]);
@@ -152,5 +157,7 @@ int	init(int ac, char **av, t_prog *prog)
 		return (printf("%s", FTCP), free_prog(prog), 1);
 	if (init_philo(prog))
 		return (printf("%s", FTIP), free_prog(prog), 1);
+	if (init_forks(prog))
+		return (printf("%s", FTIM), 1);
 	return (0);
 }

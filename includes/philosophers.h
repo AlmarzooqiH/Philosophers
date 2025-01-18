@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/15 16:14:11 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/18 11:51:37 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int		init(int ac, char **av, t_prog *prog);
 int		ft_isonlyspace(const char *s);
 void	*simu(void *arg);
 int		start_threads(t_prog *prog);
+void	get_forks(t_philo philo);
 void	eat(t_philo philo);
 void	think(t_philo philo);
 void	psleep(t_philo philo);

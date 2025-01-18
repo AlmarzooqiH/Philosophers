@@ -6,11 +6,22 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/15 16:11:05 by hamad            ###   ########.fr       */
+/*   Updated: 2025/01/18 14:03:52 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philosophers.h"
+
+void	*monitor(void *arg)
+{
+	t_prog	*prog;
+
+	prog = (t_prog *)arg;
+	while (1)
+	{
+		prog->time++;
+	}
+}
 
 void	*simu(void *arg)
 {
@@ -19,9 +30,12 @@ void	*simu(void *arg)
 	philo = *(t_philo *)arg;
 	while (1)
 	{
-		eat(philo);
+		if (philo.prog->time - philo.tse <= 0)
+			return (printf("%ld died\n", philo.id), NULL);
+		get_forks(philo);
 		think(philo);
 		psleep(philo);
+		philo.tse = philo.prog->time;
 	}
 	return (NULL);
 }
@@ -44,6 +58,8 @@ int	start_threads(t_prog *prog)
 			return (printf("%s", FTT), 0);
 		i++;
 	}
+	if (pthread_create(&prog->monitor, NULL, monitor, prog))
+			return (printf("%s", FTT), 0);
 	i = 0;
 	while (i < prog->n_philo)
 	{
@@ -51,6 +67,8 @@ int	start_threads(t_prog *prog)
 			return (printf("%s", FTJT), 0);
 		i++;
 	}
+	if (pthread_join(prog->monitor, NULL))
+		return (printf("%s", FTJT), 0);
 	return (1);
 }
 
