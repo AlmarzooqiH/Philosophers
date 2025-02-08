@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:18:08 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/18 13:57:59 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/08 11:09:45 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ typedef struct s_prog
 	int				neat;
 	pthread_t		monitor;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	print;
 	t_philo			*philo;
 }	t_prog;
 

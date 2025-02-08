@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/18 14:05:11 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/08 11:16:36 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	free_prog2(t_prog *prog)
 		prog->neat = 0;
 		prog->time = 0;
 		pthread_detach(prog->monitor);
+		pthread_mutex_destroy(&prog->print);
 		free(prog);
 		prog = NULL;
 	}
@@ -159,5 +160,7 @@ int	init(int ac, char **av, t_prog *prog)
 		return (printf("%s", FTIP), free_prog(prog), 1);
 	if (init_forks(prog))
 		return (printf("%s", FTIM), 1);
+	if (pthread_mutex_init(&prog->print, NULL) != 0)
+		return (printf("%s", FTIMP), free_prog(prog), 1);
 	return (0);
 }

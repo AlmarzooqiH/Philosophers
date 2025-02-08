@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 05:55:48 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/15 05:57:50 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/08 10:56:43 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,12 @@ void	*ft_calloc(size_t count, size_t size)
 		return (NULL);
 	ft_bzero(intialize, size * count);
 	return (intialize);
+}
+
+long	get_timestamp_ms(void)
+{
+	struct timeval	tv;
+
+	gettimeofday(&tv, NULL);
+	return (((long)tv.tv_sec * 1000) + ((long)tv.tv_usec / 1000));
 }

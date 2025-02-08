@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/01/18 11:51:37 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/08 10:57:09 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	get_forks(t_philo philo);
 void	eat(t_philo philo);
 void	think(t_philo philo);
 void	psleep(t_philo philo);
+long	get_timestamp_ms(void);
 #endif
