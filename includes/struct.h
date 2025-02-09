@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:18:08 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/08 11:09:45 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/09 13:04:49 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,14 @@ typedef struct s_prog
 	pthread_mutex_t	print;
 	t_philo			*philo;
 }	t_prog;
+
+enum e_activities
+{
+	e_pick_up_fork,
+	e_eat,
+	e_think,
+	e_sleep,
+	e_dead
+};
 
 #endif

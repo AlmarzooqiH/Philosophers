@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/08 10:57:09 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/09 13:10:06 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,5 @@ void	eat(t_philo philo);
 void	think(t_philo philo);
 void	psleep(t_philo philo);
 long	get_timestamp_ms(void);
+void	print_status(t_philo philo, int activity);
 #endif

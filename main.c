@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/08 10:56:56 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/09 13:08:54 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,7 @@ void	*monitor(void *arg)
 	t_prog	*prog;
 
 	prog = (t_prog *)arg;
-	while (1)
-	{
-		prog->time++;
-	}
+	prog->time++;
 }
 
 void	*simu(void *arg)
@@ -28,13 +25,10 @@ void	*simu(void *arg)
 	t_philo	philo;
 
 	philo = *(t_philo *)arg;
-	while (!philo.ds)
-	{
-		get_forks(philo);
-		think(philo);
-		psleep(philo);
-		philo.tse = philo.prog->time;
-	}
+	get_forks(philo);
+	think(philo);
+	psleep(philo);
+	philo.tse = philo.prog->time;
 	return (NULL);
 }
 
@@ -58,6 +52,8 @@ int	start_threads(t_prog *prog)
 	}
 	if (pthread_create(&prog->monitor, NULL, monitor, prog))
 		return (printf("%s", FTT), 0);
+	if (pthread_join(prog->monitor, NULL))
+		return (printf("%s", FTJT), 0);
 	i = 0;
 	while (i < prog->n_philo)
 	{
@@ -65,8 +61,6 @@ int	start_threads(t_prog *prog)
 			return (printf("%s", FTJT), 0);
 		i++;
 	}
-	if (pthread_join(prog->monitor, NULL))
-		return (printf("%s", FTJT), 0);
 	return (1);
 }
 

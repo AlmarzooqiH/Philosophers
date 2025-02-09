@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/08 11:16:36 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/09 13:07:55 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ void	free_prog2(t_prog *prog)
 		prog->ts = 0;
 		prog->neat = 0;
 		prog->time = 0;
-		pthread_detach(prog->monitor);
 		pthread_mutex_destroy(&prog->print);
 		free(prog);
 		prog = NULL;
@@ -87,7 +86,6 @@ void	free_prog(t_prog *prog)
 			prog->philo[i].mst = 0;
 			prog->philo[i].msd = 0;
 			prog->philo[i].tse = 0;
-			pthread_detach(prog->philo[i].tid);
 			i++;
 		}
 		free(prog->philo);
