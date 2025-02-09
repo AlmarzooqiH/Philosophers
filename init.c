@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/09 13:07:55 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/02/10 01:43:55 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ int	init(int ac, char **av, t_prog *prog)
 	prog->te = ft_atol(av[3]);
 	prog->ts = ft_atol(av[4]);
 	prog->status = 0;
-	prog->time = 0;
+	prog->time = gtms();
 	if (ac == 6)
 		prog->neat = ft_atol(av[5]);
 	else
