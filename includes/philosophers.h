@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/09 13:10:06 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/02/10 01:47:25 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@
 # include <limits.h>
 # include "struct.h"
 # include "error.h"
+
+# define TF "Taken a fork\n"
+# define EAT "Eating\n"
+# define SLP "Sleeping\n"
+# define TK "Thinking\n"
+# define DEAD "Died\n"
 
 // void	print_data(t_prog *prog);
 void	ft_bzero(void *s, size_t n);
@@ -42,6 +48,6 @@ void	get_forks(t_philo philo);
 void	eat(t_philo philo);
 void	think(t_philo philo);
 void	psleep(t_philo philo);
-long	get_timestamp_ms(void);
+long	gtms(void);
 void	print_status(t_philo philo, int activity);
 #endif
