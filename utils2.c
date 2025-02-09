@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 05:55:48 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/08 10:56:43 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/10 01:44:42 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,16 @@ void	*ft_calloc(size_t count, size_t size)
 	return (intialize);
 }
 
-long	get_timestamp_ms(void)
+/**
+ * @name Get time in mili-seconds.
+ * @brief This function will return the current time in mili-seconds.
+ * @return The current time in mili-seconds.
+ */
+long	gtms(void)
 {
 	struct timeval	tv;
 
-	gettimeofday(&tv, NULL);
-	return (((long)tv.tv_sec * 1000) + ((long)tv.tv_usec / 1000));
+	if (gettimeofday(&tv, NULL) == -1)
+		return (printf("Failed to get time\n"), -1);
+	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
