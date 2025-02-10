@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/10 01:43:55 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/11 02:05:45 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ void	free_prog(t_prog *prog)
 		while (i < prog->n_philo)
 		{
 			prog->philo[i].id = i;
+			prog->philo[i].n_meals = 0;
 			prog->philo[i].lh = 0;
 			prog->philo[i].rh = 0;
 			prog->philo[i].mstf = 0;
@@ -111,6 +112,7 @@ int	init_philo(t_prog *prog)
 	while (i < prog->n_philo)
 	{
 		prog->philo[i].id = i;
+		prog->philo[i].n_meals = 0;
 		prog->philo[i].lh = 0;
 		prog->philo[i].rh = 0;
 		prog->philo[i].es = 0;
