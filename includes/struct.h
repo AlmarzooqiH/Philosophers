@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:18:08 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/10 01:18:55 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/11 02:04:56 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_prog	t_prog;
 /**
  * @brief Structure to hold the information of the philosophers.
  * @var id The id of the philosopher.
+ * @var n_meals The number of meals the philosopher has eaten.
  * var	tid The thread id of the philosopher.
  * @var lh The status of the left hand. (If it has the fork).
  * @var rh The status of the right hand. (If it has the fork).
@@ -37,6 +38,7 @@ typedef struct s_prog	t_prog;
 typedef struct s_philo
 {
 	long			id;
+	long			n_meals;
 	pthread_t		tid;
 	int				lh;
 	int				rh;
