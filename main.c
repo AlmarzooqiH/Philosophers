@@ -6,11 +6,18 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/10 02:04:21 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/11 02:14:32 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philosophers.h"
+
+int	is_dead(t_philo *philo)
+{
+	if (philo->mse > philo->prog->td)
+		return (print_status(philo, e_dead), 1);
+	return (0);
+}
 
 void	*monitor(void *arg)
 {
@@ -22,12 +29,25 @@ void	*monitor(void *arg)
 
 void	*simu(void *arg)
 {
-	t_philo	philo;
+	t_philo	*philo;
 
-	philo = *(t_philo *)arg;
-	get_forks(philo);
-	think(philo);
-	psleep(philo);
+	philo = (t_philo *)arg;
+	while (!is_dead(philo))
+	{
+		get_forks(philo);
+		if (philo->prog->n_philo == 1)
+		{
+			sleep(philo->prog->td);
+			return (NULL);
+		}
+		get_forks(philo);
+		if (philo->lh && philo->rh)
+			eat(philo);
+		release_forks(philo);
+		release_forks(philo);
+		psleep(philo);
+		think(philo);
+	}
 	return (NULL);
 }
 
