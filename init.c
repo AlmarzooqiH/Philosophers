@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/11 02:05:45 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/12 16:45:22 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,6 @@ void	free_prog(t_prog *prog)
 		{
 			prog->philo[i].id = i;
 			prog->philo[i].n_meals = 0;
-			prog->philo[i].lh = 0;
-			prog->philo[i].rh = 0;
 			prog->philo[i].mstf = 0;
 			prog->philo[i].mse = 0;
 			prog->philo[i].mss = 0;
@@ -113,8 +111,6 @@ int	init_philo(t_prog *prog)
 	{
 		prog->philo[i].id = i;
 		prog->philo[i].n_meals = 0;
-		prog->philo[i].lh = 0;
-		prog->philo[i].rh = 0;
 		prog->philo[i].es = 0;
 		prog->philo[i].ts = 0;
 		prog->philo[i].ss = 0;
@@ -144,9 +140,9 @@ int	init(int ac, char **av, t_prog *prog)
 	int		i;
 
 	prog->n_philo = ft_atol(av[1]);
-	prog->td = ft_atol(av[2]);
-	prog->te = ft_atol(av[3]);
-	prog->ts = ft_atol(av[4]);
+	prog->td = ft_atol(av[2]) * 1000;
+	prog->te = ft_atol(av[3]) * 1000;
+	prog->ts = ft_atol(av[4]) * 1000;
 	prog->status = 0;
 	prog->time = gtms();
 	if (ac == 6)
@@ -160,7 +156,10 @@ int	init(int ac, char **av, t_prog *prog)
 		return (printf("%s", FTIP), free_prog(prog), 1);
 	if (init_forks(prog))
 		return (printf("%s", FTIM), 1);
-	if (pthread_mutex_init(&prog->print, NULL) != 0)
-		return (printf("%s", FTIMP), free_prog(prog), 1);
+	prog->fs = (int *)ft_calloc(prog->n_philo, sizeof(int));
+	if (!prog->fs)
+		return (printf("%s", FTCFS), free_prog(prog), 1);
+	if (init_prog_mutex(prog) == 1)
+		return (free_prog(prog), 1);
 	return (0);
 }

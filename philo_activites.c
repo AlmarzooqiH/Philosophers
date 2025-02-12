@@ -6,70 +6,78 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/11 02:11:15 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/12 15:25:59 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philosophers.h"
 
-void	print_status(t_philo *philo, int activity)
+void	print_status(t_philo *p, int activity)
 {
-	pthread_mutex_lock(&philo->prog->print);
+	pthread_mutex_lock(&p->prog->print);
 	if (activity == e_pick_up_fork)
-		printf("%ld %ld %s", (gtms() - philo->prog->time), philo->id, TF);
+		printf("%ld %ld %s", (gtms() - p->prog->time), p->id, TF);
 	else if (activity == e_eat)
-		printf("%ld %ld %s", gtms() - philo->prog->time, philo->id, EAT);
+		printf("%ld %ld %s", gtms() - p->prog->time, p->id, EAT);
 	else if (activity == e_sleep)
-		printf("%ld %ld %s", gtms() - philo->prog->time, philo->id, SLP);
+		printf("%ld %ld %s", gtms() - p->prog->time, p->id, SLP);
 	else if (activity == e_think)
-		printf("%ld %ld %s", gtms() - philo->prog->time, philo->id, TK);
+		printf("%ld %ld %s", gtms() - p->prog->time, p->id, TK);
 	else if (activity == e_dead)
-		printf("%ld %ld %s", gtms() - philo->prog->time, philo->id, DEAD);
-	pthread_mutex_unlock(&philo->prog->print);
+		printf("%ld %ld %s", gtms() - p->prog->time, p->id, DEAD);
+	pthread_mutex_unlock(&p->prog->print);
 }
 
-void	get_forks(t_philo *philo)
+void	get_left_fork(t_philo *p)
 {
-	if (!philo->lh)
+	int	fork;
+
+	fork = 0;
+	if (!fork)
 	{
-		while (!philo->lh)
+		while (!fork)
 		{
-			pthread_mutex_lock(&philo->prog->forks[philo->id]);
-			philo->lh = 1;
-			print_status(philo, e_pick_up_fork);
-			pthread_mutex_unlock(&philo->prog->forks[philo->id]);
-			if (!philo->lh)
-				usleep(TTT);
-		}
-	}
-	else if (!philo->rh)
-	{
-		while (!philo->rh)
-		{
-			pthread_mutex_lock(&philo->prog->forks[(philo->id + 1) % philo->prog->n_philo]);
-			philo->rh = 1;
-			print_status(philo, e_pick_up_fork);
-			pthread_mutex_unlock(&philo->prog->forks[(philo->id + 1) % philo->prog->n_philo]);
-			if (!philo->rh)
+			pthread_mutex_lock(&p->prog->forks[p->id]);
+			p->prog->fs[p->id] = 1;
+			fork = 1;
+			print_status(p, e_pick_up_fork);
+			pthread_mutex_unlock(&p->prog->forks[p->id]);
+			if (!fork)
 				usleep(TTT);
 		}
 	}
 }
 
-void	eat(t_philo *philo)
+void	get_right_fork(t_philo *p)
 {
-	print_status(philo, e_eat);
-	usleep(philo->prog->te);
+	int	fork_pos;
+	int	fork;
+
+	fork = 0;
+	fork_pos = (p->id + 1) % p->prog->n_philo;
+	if (!fork)
+	{
+		while (!fork)
+		{
+			pthread_mutex_lock(&p->prog->forks[fork_pos]);
+			p->prog->fs[fork_pos] = 1;
+			fork = 1;
+			print_status(p, e_pick_up_fork);
+			pthread_mutex_unlock(&p->prog->forks[fork_pos]);
+			if (!fork)
+				usleep(TTT);
+		}
+	}
 }
 
-void	think(t_philo *philo)
+void	eat(t_philo *p)
 {
-	print_status(philo, e_think);
+	print_status(p, e_eat);
+	usleep(p->prog->te);
+}
+
+void	think(t_philo *p)
+{
+	print_status(p, e_think);
 	usleep(TTT);
-}
-
-void	psleep(t_philo *philo)
-{
-	print_status(philo, e_sleep);
-	usleep(philo->prog->ts);
 }

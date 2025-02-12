@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/11 02:14:32 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/12 16:46:37 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,26 @@ void	*monitor(void *arg)
 
 void	*simu(void *arg)
 {
-	t_philo	*philo;
+	t_philo	*p;
 
-	philo = (t_philo *)arg;
-	while (!is_dead(philo))
+	p = (t_philo *)arg;
+	while (!is_dead(p))
 	{
-		get_forks(philo);
-		if (philo->prog->n_philo == 1)
+		get_left_fork(p);
+		if (p->prog->n_philo == 1)
 		{
-			sleep(philo->prog->td);
+			usleep(p->prog->td);
 			return (NULL);
 		}
-		get_forks(philo);
-		if (philo->lh && philo->rh)
-			eat(philo);
-		release_forks(philo);
-		release_forks(philo);
-		psleep(philo);
-		think(philo);
+		get_right_fork(p);
+		pthread_mutex_lock(&p->prog->eat);
+		eat(p);
+		p->n_meals++;
+		pthread_mutex_unlock(&p->prog->eat);
+		release_forks(p);
+		release_forks(p);
+		psleep(p);
+		think(p);
 	}
 	return (NULL);
 }

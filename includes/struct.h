@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:18:08 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/11 02:04:56 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/12 16:39:36 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ typedef struct s_prog	t_prog;
  * @var id The id of the philosopher.
  * @var n_meals The number of meals the philosopher has eaten.
  * var	tid The thread id of the philosopher.
- * @var lh The status of the left hand. (If it has the fork).
- * @var rh The status of the right hand. (If it has the fork).
  * @var es The eating status of the philosopher.
  * @var ts The thinking status of the philosopher.
  * @var ss The sleeping status of the philosopher.
@@ -40,8 +38,6 @@ typedef struct s_philo
 	long			id;
 	long			n_meals;
 	pthread_t		tid;
-	int				lh;
-	int				rh;
 	int				es;
 	int				ts;
 	int				ss;
@@ -62,6 +58,7 @@ typedef struct s_philo
  * @var te The time to eat (time in milliseconds).
  * @var ts The time to sleep (time in milliseconds).
  * @var neat The number of eatings. (optional)
+ * @var	fs	fork status.
  * @var time The time when the simulation started/ended.
  * @var philo The array of philosophers.
  */
@@ -75,8 +72,10 @@ typedef struct s_prog
 	long			ts;
 	int				neat;
 	pthread_t		monitor;
+	int				*fs;
 	pthread_mutex_t	*forks;
 	pthread_mutex_t	print;
+	pthread_mutex_t	eat;
 	t_philo			*philo;
 }	t_prog;
 
