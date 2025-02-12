@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/12 16:43:55 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/12 17:04:11 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 //Time To Think
 # define TTT 150
 
-// void	print_data(t_prog *prog);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 size_t	ft_strlen(const char *str);
@@ -53,7 +52,8 @@ void	get_right_fork(t_philo *p);
 void	eat(t_philo *p);
 void	think(t_philo *p);
 void	psleep(t_philo *p);
-void	release_forks(t_philo *p);
+void	release_left_fork(t_philo *p);
+void	release_right_fork(t_philo *p);
 long	gtms(void);
 void	print_status(t_philo *philo, int activity);
 #endif

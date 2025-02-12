@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/12 16:46:37 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/12 17:03:22 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int	is_dead(t_philo *philo)
 {
+	pthread_mutex_lock(&philo->prog->dead);
 	if (philo->mse > philo->prog->td)
-		return (print_status(philo, e_dead), 1);
+		return (print_status(philo, e_dead),
+			pthread_mutex_unlock(&philo->prog->dead), 1);
+	pthread_mutex_unlock(&philo->prog->dead);
 	return (0);
 }
 
@@ -45,8 +48,8 @@ void	*simu(void *arg)
 		eat(p);
 		p->n_meals++;
 		pthread_mutex_unlock(&p->prog->eat);
-		release_forks(p);
-		release_forks(p);
+		release_left_fork(p);
+		release_right_fork(p);
 		psleep(p);
 		think(p);
 	}

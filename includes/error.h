@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 07:43:09 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/12 16:40:50 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/12 16:53:36 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@
 /* Initialization Errors */
 # define FTIP "Failed to init t_philo\n\0"
 # define FTIM "Failed to init mutex fork\n\0"
-# define FTIMP "Failed to init mutex print\n\0"
-# define FTIME "Failed to init mutex eat\n\0"
+# define FTIPM "Failed to init print mutex\n\0"
+# define FTIEM "Failed to init eat mutex\n\0"
+# define FTIDM "Failed to init dead mutex\n\0"
 
 /* Threads Errors */
 # define FTT "Failed to start threads\n\0"
