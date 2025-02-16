@@ -6,19 +6,24 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/12 17:03:22 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/16 21:10:54 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philosophers.h"
 
-int	is_dead(t_philo *philo)
+int	is_dead(t_prog *prog)
 {
-	pthread_mutex_lock(&philo->prog->dead);
-	if (philo->mse > philo->prog->td)
-		return (print_status(philo, e_dead),
-			pthread_mutex_unlock(&philo->prog->dead), 1);
-	pthread_mutex_unlock(&philo->prog->dead);
+	int	i;
+
+	i = 0;
+	while (i < prog->n_philo)
+	{
+		if (prog->philo[i].last_meal >= prog->td)
+			return (prog->dead_philo = 1,
+				print_status(&prog->philo[i], e_dead), 1);
+		i++;
+	}
 	return (0);
 }
 
@@ -27,7 +32,9 @@ void	*monitor(void *arg)
 	t_prog	*prog;
 
 	prog = (t_prog *)arg;
-	prog->time++;
+	while (!prog->dead_philo)
+		is_dead(prog);
+	return (NULL);
 }
 
 void	*simu(void *arg)
@@ -35,21 +42,13 @@ void	*simu(void *arg)
 	t_philo	*p;
 
 	p = (t_philo *)arg;
-	while (!is_dead(p))
+	while (!p->prog->dead_philo)
 	{
-		get_left_fork(p);
-		if (p->prog->n_philo == 1)
-		{
-			usleep(p->prog->td);
-			return (NULL);
-		}
-		get_right_fork(p);
-		pthread_mutex_lock(&p->prog->eat);
+		plf(p);
+		prf(p);
 		eat(p);
-		p->n_meals++;
-		pthread_mutex_unlock(&p->prog->eat);
-		release_left_fork(p);
-		release_right_fork(p);
+		dlf(p);
+		drf(p);
 		psleep(p);
 		think(p);
 	}
