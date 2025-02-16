@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 07:43:09 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/12 16:53:36 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/16 20:39:45 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 /* Malloc Errors */
 # define FTCT "Failed to calloc t_prog\n\0"
 # define FTCP "Failed to calloc t_philo\n\0"
-# define FTCFS "Failed to calloc fork status\n\0"
+# define FTCF "Failed to calloc forks\n\0"
 
 /* Initialization Errors */
 # define FTIP "Failed to init t_philo\n\0"
