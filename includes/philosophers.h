@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/12 17:04:11 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/16 00:01:56 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,18 @@ int		init_forks(t_prog *prog);
 void	destroy_forks(t_prog *prog);
 int		init(int ac, char **av, t_prog *prog);
 int		init_prog_mutex(t_prog *prog);
+void	destroy_mutex(t_prog *prog);
+int		is_dead(t_prog *prog);
 int		ft_isonlyspace(const char *s);
 void	*simu(void *arg);
 int		start_threads(t_prog *prog);
-void	get_left_fork(t_philo *p);
-void	get_right_fork(t_philo *p);
-void	eat(t_philo *p);
-void	think(t_philo *p);
-void	psleep(t_philo *p);
-void	release_left_fork(t_philo *p);
-void	release_right_fork(t_philo *p);
 long	gtms(void);
 void	print_status(t_philo *philo, int activity);
+void	plf(t_philo *p);
+void	dlf(t_philo *p);
+void	eat(t_philo *p);
+void	psleep(t_philo *p);
+void	think(t_philo *p);
+void	prf(t_philo *p);
+void	drf(t_philo *p);
 #endif
