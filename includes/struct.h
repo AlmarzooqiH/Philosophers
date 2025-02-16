@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:18:08 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/12 16:52:08 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/16 21:09:33 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,9 @@ typedef struct s_prog	t_prog;
 /**
  * @brief Structure to hold the information of the philosophers.
  * @var id The id of the philosopher.
- * @var n_meals The number of meals the philosopher has eaten.
+ * @var n_meals The number of meals the philosopher has eaten (Optional).
  * var	tid The thread id of the philosopher.
- * @var es The eating status of the philosopher.
- * @var ts The thinking status of the philosopher.
- * @var ss The sleeping status of the philosopher.
- * @var ds The dying status of the philosopher.
- * @var mstf milliseconds when he took the fork.
- * @var mse milliseconds when he started eating.
- * @var mss milliseconds when he started sleeping.
- * @var mst milliseconds when he started thinking.
- * @var msd milliseconds when he died.
- * @var	tse Time since eaten.
+ * @var	last_meal Time since eaten.
  * @var mfork The mutex fork of the philosopher.
  */
 typedef struct s_philo
@@ -38,16 +29,7 @@ typedef struct s_philo
 	long			id;
 	long			n_meals;
 	pthread_t		tid;
-	int				es;
-	int				ts;
-	int				ss;
-	int				ds;
-	long			mstf;
-	long			mse;
-	long			mss;
-	long			mst;
-	long			msd;
-	long			tse;
+	long			last_meal;
 	t_prog			*prog;
 }	t_philo;
 
@@ -58,25 +40,28 @@ typedef struct s_philo
  * @var te The time to eat (time in milliseconds).
  * @var ts The time to sleep (time in milliseconds).
  * @var neat The number of eatings. (optional)
- * @var	fs	fork status.
- * @var time The time when the simulation started/ended.
+ * @var time The time since the start of the simulation.
+ * @var dead_philo This will be 1 if we found a dead philosopher and will end
+ * 	the simulation.
+ * @var	forks	fork status.
+ * @var	monitor The monitor thread.
+ * @var	mforks The mutex forks.
+ * @var	print The print mutex.
  * @var philo The array of philosophers.
  */
 typedef struct s_prog
 {
 	int				n_philo;
-	int				status;
-	long			time;
 	long			td;
 	long			te;
 	long			ts;
 	int				neat;
+	long			time;
+	int				dead_philo;
+	int				*forks;
 	pthread_t		monitor;
-	int				*fs;
-	pthread_mutex_t	*forks;
+	pthread_mutex_t	*mforks;
 	pthread_mutex_t	print;
-	pthread_mutex_t	eat;
-	pthread_mutex_t	dead;
 	t_philo			*philo;
 }	t_prog;
 
