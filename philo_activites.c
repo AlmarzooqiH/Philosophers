@@ -6,12 +6,18 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/12 16:59:15 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/16 21:09:45 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philosophers.h"
 
+/**
+ * @brief This function will print what is the philospher is doing.
+ * @param p The philosopher.
+ * @param activity The activity that the philosopher is doing.
+ * @return void.
+ */
 void	print_status(t_philo *p, int activity)
 {
 	pthread_mutex_lock(&p->prog->print);
@@ -28,56 +34,73 @@ void	print_status(t_philo *p, int activity)
 	pthread_mutex_unlock(&p->prog->print);
 }
 
-void	get_left_fork(t_philo *p)
+/**
+ * @name Pick Left Fork
+ * @brief This function will pick the left fork.
+ * @param p The philosopher.
+ * @return void.
+ */
+void	plf(t_philo *p)
 {
-	int	fork;
+	int	picked;
 
-	fork = 0;
-	if (!fork)
+	picked = 0;
+	while (!picked)
 	{
-		while (!fork)
-		{
-			pthread_mutex_lock(&p->prog->forks[p->id]);
-			p->prog->fs[p->id] = 1;
-			fork = 1;
-			print_status(p, e_pick_up_fork);
-			pthread_mutex_unlock(&p->prog->forks[p->id]);
-			if (!fork)
-				usleep(TTT);
-		}
+		pthread_mutex_lock(&p->prog->mforks[p->id]);
+		p->prog->forks[p->id] = 1;
+		picked = 1;
+		print_status(p, e_pick_up_fork);
+		pthread_mutex_unlock(&p->prog->mforks[p->id]);
+		if (picked)
+			break ;
 	}
 }
 
-void	get_right_fork(t_philo *p)
+/**
+ * @name Pick Right Fork
+ * @brief This function will pick the right fork.
+ * @param p The philosopher.
+ * @return void.
+ */
+void	prf(t_philo *p)
 {
-	int	fork_pos;
-	int	fork;
+	int	picked;
+	int	f_pos;
 
-	fork = 0;
-	fork_pos = (p->id + 1) % p->prog->n_philo;
-	if (!fork)
+	picked = 0;
+	f_pos = (p->id + 1) % p->prog->n_philo;
+	while (!picked)
 	{
-		while (!fork)
-		{
-			pthread_mutex_lock(&p->prog->forks[fork_pos]);
-			p->prog->fs[fork_pos] = 1;
-			fork = 1;
-			print_status(p, e_pick_up_fork);
-			pthread_mutex_unlock(&p->prog->forks[fork_pos]);
-			if (!fork)
-				usleep(TTT);
-		}
+		pthread_mutex_lock(&p->prog->mforks[f_pos]);
+		p->prog->forks[f_pos] = 1;
+		picked = 1;
+		print_status(p, e_pick_up_fork);
+		pthread_mutex_unlock(&p->prog->mforks[f_pos]);
+		if (picked)
+			break ;
 	}
 }
 
+/**
+ * @brief This function will simulate the eating behavior.
+ * @param p The philosopher.
+ * @return void.
+ */
 void	eat(t_philo *p)
 {
+	p->last_meal = gtms();
 	print_status(p, e_eat);
 	usleep(p->prog->te);
 }
 
-void	think(t_philo *p)
+/**
+ * @brief This function will simulate the sleeping behavior.
+ * @param p The philosopher.
+ * @return void.
+ */
+void	psleep(t_philo *p)
 {
-	print_status(p, e_think);
-	usleep(TTT);
+	print_status(p, e_sleep);
+	usleep(p->prog->ts);
 }
