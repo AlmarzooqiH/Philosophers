@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/12 16:53:52 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/16 20:40:54 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ int	init_forks(t_prog *prog)
 {
 	int	i;
 
-	prog->forks = (pthread_mutex_t *)ft_calloc(prog->n_philo,
+	prog->mforks = (pthread_mutex_t *)ft_calloc(prog->n_philo,
 			sizeof(pthread_mutex_t));
-	if (!prog->forks)
+	if (!prog->mforks)
 		return (printf("%s", FTIP), free_prog(prog), 1);
 	i = 0;
 	while (i < prog->n_philo)
 	{
-		if (pthread_mutex_init(&prog->forks[i], NULL))
+		if (pthread_mutex_init(&prog->mforks[i], NULL))
 			return (printf("%s", FTIP), free_prog(prog), 1);
 		i++;
 	}
@@ -45,10 +45,12 @@ void	free_prog2(t_prog *prog)
 {
 	if (prog)
 	{
-		if (prog->forks)
+		if (prog->mforks)
 		{
 			destroy_forks(prog);
 			free(prog->forks);
+			free(prog->mforks);
+			prog->mforks = NULL;
 			prog->forks = NULL;
 		}
 		prog->n_philo = 0;
@@ -57,7 +59,8 @@ void	free_prog2(t_prog *prog)
 		prog->ts = 0;
 		prog->neat = 0;
 		prog->time = 0;
-		pthread_mutex_destroy(&prog->print);
+		prog->dead_philo = 0;
+		destroy_mutex(prog);
 		free(prog);
 		prog = NULL;
 	}
@@ -79,12 +82,6 @@ void	free_prog(t_prog *prog)
 		{
 			prog->philo[i].id = i;
 			prog->philo[i].n_meals = 0;
-			prog->philo[i].mstf = 0;
-			prog->philo[i].mse = 0;
-			prog->philo[i].mss = 0;
-			prog->philo[i].mst = 0;
-			prog->philo[i].msd = 0;
-			prog->philo[i].tse = 0;
 			i++;
 		}
 		free(prog->philo);
@@ -111,16 +108,6 @@ int	init_philo(t_prog *prog)
 	{
 		prog->philo[i].id = i;
 		prog->philo[i].n_meals = 0;
-		prog->philo[i].es = 0;
-		prog->philo[i].ts = 0;
-		prog->philo[i].ss = 0;
-		prog->philo[i].ds = 0;
-		prog->philo[i].mstf = 0;
-		prog->philo[i].mse = 0;
-		prog->philo[i].mss = 0;
-		prog->philo[i].mst = 0;
-		prog->philo[i].msd = 0;
-		prog->philo[i].tse = 0;
 		prog->philo[i].prog = prog;
 		i++;
 	}
@@ -143,7 +130,6 @@ int	init(int ac, char **av, t_prog *prog)
 	prog->td = ft_atol(av[2]) * 1000;
 	prog->te = ft_atol(av[3]) * 1000;
 	prog->ts = ft_atol(av[4]) * 1000;
-	prog->status = 0;
 	prog->time = gtms();
 	if (ac == 6)
 		prog->neat = ft_atol(av[5]);
@@ -152,13 +138,13 @@ int	init(int ac, char **av, t_prog *prog)
 	prog->philo = (t_philo *)ft_calloc((prog->n_philo), sizeof(t_philo));
 	if (!prog->philo)
 		return (printf("%s", FTCP), free_prog(prog), 1);
+	prog->forks = (int *)ft_calloc(prog->n_philo, sizeof(int));
+	if (!prog->forks)
+		return (printf("%s", FTCF), free_prog(prog), 1);
 	if (init_philo(prog))
 		return (printf("%s", FTIP), free_prog(prog), 1);
 	if (init_forks(prog))
 		return (printf("%s", FTIM), 1);
-	prog->fs = (int *)ft_calloc(prog->n_philo, sizeof(int));
-	if (!prog->fs)
-		return (printf("%s", FTCFS), free_prog(prog), 1);
 	if (init_prog_mutex(prog) == 1)
 		return (free_prog(prog), 1);
 	return (0);
