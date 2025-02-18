@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/16 20:40:54 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/18 21:27:11 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,6 +138,7 @@ int	init(int ac, char **av, t_prog *prog)
 	prog->philo = (t_philo *)ft_calloc((prog->n_philo), sizeof(t_philo));
 	if (!prog->philo)
 		return (printf("%s", FTCP), free_prog(prog), 1);
+	prog->dead_philo = 0;
 	prog->forks = (int *)ft_calloc(prog->n_philo, sizeof(int));
 	if (!prog->forks)
 		return (printf("%s", FTCF), free_prog(prog), 1);

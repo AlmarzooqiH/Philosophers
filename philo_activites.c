@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/16 21:09:45 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/17 18:09:40 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	plf(t_philo *p)
 {
 	int	picked;
 
+	if (p->prog->dead_philo)
+		return ;
 	picked = 0;
 	while (!picked)
 	{
@@ -52,8 +54,8 @@ void	plf(t_philo *p)
 		picked = 1;
 		print_status(p, e_pick_up_fork);
 		pthread_mutex_unlock(&p->prog->mforks[p->id]);
-		if (picked)
-			break ;
+		if (!picked)
+			usleep(TTT * 1000);
 	}
 }
 
@@ -68,6 +70,8 @@ void	prf(t_philo *p)
 	int	picked;
 	int	f_pos;
 
+	if (p->prog->dead_philo)
+		return ;
 	picked = 0;
 	f_pos = (p->id + 1) % p->prog->n_philo;
 	while (!picked)
@@ -77,8 +81,8 @@ void	prf(t_philo *p)
 		picked = 1;
 		print_status(p, e_pick_up_fork);
 		pthread_mutex_unlock(&p->prog->mforks[f_pos]);
-		if (picked)
-			break ;
+		if (!picked)
+			usleep(TTT * 1000);
 	}
 }
 
@@ -89,6 +93,8 @@ void	prf(t_philo *p)
  */
 void	eat(t_philo *p)
 {
+	if (p->prog->dead_philo)
+		return ;
 	p->last_meal = gtms();
 	print_status(p, e_eat);
 	usleep(p->prog->te);
@@ -101,6 +107,8 @@ void	eat(t_philo *p)
  */
 void	psleep(t_philo *p)
 {
+	if (p->prog->dead_philo)
+		return ;
 	print_status(p, e_sleep);
 	usleep(p->prog->ts);
 }
