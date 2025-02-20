@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/20 16:35:39 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/20 22:41:50 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,22 @@
 int	is_dead(t_prog *prog)
 {
 	int		i;
-	long	ctime;
 
+	pthread_mutex_lock(&prog->dead);
 	if (prog->n_philo == 1)
 		return (prog->dead_philo = 1,
-			print_status(&prog->philo[0], e_dead), 1);
-	ctime = gtms();
+			print_status(&prog->philo[0], e_dead),
+			pthread_mutex_unlock(&prog->dead), 1);
 	i = 0;
 	while (i < prog->n_philo)
 	{
-		if ((ctime - prog->philo[i].last_meal) > prog->td)
+		if ((gtms() - prog->philo[i].last_meal) >= prog->td)
 			return (prog->dead_philo = 1,
-				print_status(&prog->philo[i], e_dead), 1);
-		usleep(TTT * 100);
+				print_status(&prog->philo[i], e_dead),
+				pthread_mutex_unlock(&prog->dead), 1);
 		i++;
 	}
+	pthread_mutex_unlock(&prog->dead);
 	return (0);
 }
 
@@ -44,6 +45,7 @@ int	all_ate(t_prog *prog)
 	{
 		if (prog->philo[i].n_meals == prog->neat)
 			count++;
+		i++;
 	}
 	return (prog->n_philo == count);
 }
@@ -59,7 +61,7 @@ void	*monitor(void *arg)
 		if (prog->neat > 0 && all_ate(prog))
 			return (prog->dead_philo = 1, NULL);
 		is_dead(prog);
-		usleep(TTT * 1000);
+		usleep(TTT * 100);
 	}
 	return (NULL);
 }
@@ -81,7 +83,9 @@ void	*simu(void *arg)
 			return (NULL);
 		plf(p);
 		prf(p);
+		pthread_mutex_lock(&p->prog->eat);
 		eat(p);
+		pthread_mutex_unlock(&p->prog->eat);
 		dlf(p);
 		drf(p);
 		psleep(p);
@@ -100,8 +104,6 @@ int	start_threads(t_prog *prog)
 {
 	int	i;
 
-	if (pthread_create(&prog->monitor, NULL, monitor, prog))
-		return (printf("%s", FTT), 0);
 	i = 0;
 	while (i < prog->n_philo)
 	{
@@ -109,11 +111,13 @@ int	start_threads(t_prog *prog)
 			return (printf("%s", FTT), 0);
 		i++;
 	}
+	if (pthread_create(&prog->monitor, NULL, monitor, prog))
+		return (printf("%s", FTT), 0);
 	i = 0;
 	while (i < prog->n_philo)
 	{
 		if (pthread_join(prog->philo[i].tid, NULL))
-			return (printf("%s", FTJT), 0);
+		return (printf("%s", FTJT), 0);
 		i++;
 	}
 	if (pthread_join(prog->monitor, NULL))

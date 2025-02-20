@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/18 21:27:11 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/20 22:32:41 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ int	init(int ac, char **av, t_prog *prog)
 	int		i;
 
 	prog->n_philo = ft_atol(av[1]);
-	prog->td = ft_atol(av[2]) * 1000;
+	prog->td = ft_atol(av[2]);
 	prog->te = ft_atol(av[3]) * 1000;
 	prog->ts = ft_atol(av[4]) * 1000;
 	prog->time = gtms();

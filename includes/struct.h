@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:18:08 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/17 13:07:51 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/20 22:40:38 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ typedef struct s_prog
 	pthread_t		monitor;
 	pthread_mutex_t	*mforks;
 	pthread_mutex_t	print;
+	pthread_mutex_t	dead;
+	pthread_mutex_t	eat;
 	t_philo			*philo;
 }	t_prog;
 

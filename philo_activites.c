@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_activites.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/20 16:24:16 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/20 19:27:37 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ void	eat(t_philo *p)
 	if (p->prog->dead_philo)
 		return ;
 	p->last_meal = gtms();
+	p->n_meals++;
 	print_status(p, e_eat);
 	usleep(p->prog->te);
 }

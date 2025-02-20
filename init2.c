@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 15:54:03 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/17 13:07:59 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/20 22:41:18 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,16 @@ int	init_prog_mutex(t_prog *prog)
 {
 	if (pthread_mutex_init(&prog->print, NULL) != 0)
 		return (printf("%s", FTIPM), 1);
+	if (pthread_mutex_init(&prog->eat, NULL) != 0)
+		return (printf("%s", FTIEM), 1);
+	if (pthread_mutex_init(&prog->dead, NULL) != 0)
+		return (printf("%s", FTIDM), 1);
 	return (0);
 }
 
 void	destroy_mutex(t_prog *prog)
 {
 	pthread_mutex_destroy(&prog->print);
+	pthread_mutex_destroy(&prog->eat);
+	pthread_mutex_destroy(&prog->dead);
 }
