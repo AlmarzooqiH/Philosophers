@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/17 18:09:40 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/20 16:24:16 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	plf(t_philo *p)
 		print_status(p, e_pick_up_fork);
 		pthread_mutex_unlock(&p->prog->mforks[p->id]);
 		if (!picked)
-			usleep(TTT * 1000);
+			think(p);
 	}
 }
 
@@ -82,7 +82,7 @@ void	prf(t_philo *p)
 		print_status(p, e_pick_up_fork);
 		pthread_mutex_unlock(&p->prog->mforks[f_pos]);
 		if (!picked)
-			usleep(TTT * 1000);
+			think(p);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/19 01:26:26 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/20 16:35:39 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ int	is_dead(t_prog *prog)
 	long	ctime;
 
 	if (prog->n_philo == 1)
-	return (prog->dead_philo = 1,
-		print_status(&prog->philo[0], e_dead), 1);
+		return (prog->dead_philo = 1,
+			print_status(&prog->philo[0], e_dead), 1);
 	ctime = gtms();
 	i = 0;
 	while (i < prog->n_philo)
@@ -38,6 +38,8 @@ int	all_ate(t_prog *prog)
 	int	i;
 	int	count;
 
+	i = 0;
+	count = 0;
 	while (i < prog->n_philo)
 	{
 		if (prog->philo[i].n_meals == prog->neat)
@@ -51,7 +53,7 @@ void	*monitor(void *arg)
 	t_prog	*prog;
 
 	prog = (t_prog *)arg;
-	usleep(TTT	* 1000);
+	usleep(TTT * 1000);
 	while (!prog->dead_philo)
 	{
 		if (prog->neat > 0 && all_ate(prog))
@@ -83,7 +85,6 @@ void	*simu(void *arg)
 		dlf(p);
 		drf(p);
 		psleep(p);
-		think(p);
 	}
 	return (NULL);
 }
@@ -101,8 +102,8 @@ int	start_threads(t_prog *prog)
 
 	if (pthread_create(&prog->monitor, NULL, monitor, prog))
 		return (printf("%s", FTT), 0);
-		i = 0;
-		while (i < prog->n_philo)
+	i = 0;
+	while (i < prog->n_philo)
 	{
 		if (pthread_create(&prog->philo[i].tid, NULL, simu, &prog->philo[i]))
 			return (printf("%s", FTT), 0);
@@ -113,8 +114,8 @@ int	start_threads(t_prog *prog)
 	{
 		if (pthread_join(prog->philo[i].tid, NULL))
 			return (printf("%s", FTJT), 0);
-			i++;
-		}
+		i++;
+	}
 	if (pthread_join(prog->monitor, NULL))
 		return (printf("%s", FTJT), 0);
 	return (1);
