@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/20 22:41:50 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:32:53 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	*monitor(void *arg)
 	t_prog	*prog;
 
 	prog = (t_prog *)arg;
-	usleep(TTT * 1000);
+	usleep(TTT * 2000);
 	while (!prog->dead_philo)
 	{
 		if (prog->neat > 0 && all_ate(prog))
@@ -89,6 +89,7 @@ void	*simu(void *arg)
 		dlf(p);
 		drf(p);
 		psleep(p);
+		think(p);
 	}
 	return (NULL);
 }
@@ -105,6 +106,7 @@ int	start_threads(t_prog *prog)
 	int	i;
 
 	i = 0;
+	prog->time = gtms();
 	while (i < prog->n_philo)
 	{
 		if (pthread_create(&prog->philo[i].tid, NULL, simu, &prog->philo[i]))

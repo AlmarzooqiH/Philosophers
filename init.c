@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/20 22:32:41 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:23:12 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,6 @@ int	init(int ac, char **av, t_prog *prog)
 	prog->td = ft_atol(av[2]);
 	prog->te = ft_atol(av[3]) * 1000;
 	prog->ts = ft_atol(av[4]) * 1000;
-	prog->time = gtms();
 	if (ac == 6)
 		prog->neat = ft_atol(av[5]);
 	else

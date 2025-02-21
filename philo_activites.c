@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/20 19:27:37 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/02/21 16:14:02 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,26 @@ void	plf(t_philo *p)
 {
 	int	picked;
 
+	pthread_mutex_lock(&p->prog->dead);
 	if (p->prog->dead_philo)
-		return ;
+	{
+		pthread_mutex_unlock(&p->prog->dead);
+			return ;
+	}
+	pthread_mutex_unlock(&p->prog->dead);
 	picked = 0;
 	while (!picked)
 	{
 		pthread_mutex_lock(&p->prog->mforks[p->id]);
-		p->prog->forks[p->id] = 1;
-		picked = 1;
-		print_status(p, e_pick_up_fork);
+		if (p->prog->forks[p->id] == 0)
+		{
+			p->prog->forks[p->id] = 1;
+			picked = 1;
+			print_status(p, e_pick_up_fork);
+		}
 		pthread_mutex_unlock(&p->prog->mforks[p->id]);
 		if (!picked)
-			think(p);
+			usleep(TTT * 100);
 	}
 }
 
@@ -70,19 +78,27 @@ void	prf(t_philo *p)
 	int	picked;
 	int	f_pos;
 
+	pthread_mutex_lock(&p->prog->dead);
 	if (p->prog->dead_philo)
-		return ;
+	{
+		pthread_mutex_unlock(&p->prog->dead);
+			return ;
+	}
+	pthread_mutex_unlock(&p->prog->dead);
 	picked = 0;
 	f_pos = (p->id + 1) % p->prog->n_philo;
 	while (!picked)
 	{
 		pthread_mutex_lock(&p->prog->mforks[f_pos]);
-		p->prog->forks[f_pos] = 1;
-		picked = 1;
-		print_status(p, e_pick_up_fork);
+		if (p->prog->forks[f_pos] == 0)
+		{
+			p->prog->forks[f_pos] = 1;
+			picked = 1;
+			print_status(p, e_pick_up_fork);
+		}
 		pthread_mutex_unlock(&p->prog->mforks[f_pos]);
 		if (!picked)
-			think(p);
+			usleep(TTT * 100);
 	}
 }
 
@@ -93,8 +109,14 @@ void	prf(t_philo *p)
  */
 void	eat(t_philo *p)
 {
+	pthread_mutex_lock(&p->prog->dead);
 	if (p->prog->dead_philo)
-		return ;
+	{
+		pthread_mutex_unlock(&p->prog->dead);
+		pthread_mutex_unlock(&p->prog->eat);
+			return ;
+	}
+	pthread_mutex_unlock(&p->prog->dead);
 	p->last_meal = gtms();
 	p->n_meals++;
 	print_status(p, e_eat);
@@ -108,8 +130,13 @@ void	eat(t_philo *p)
  */
 void	psleep(t_philo *p)
 {
+	pthread_mutex_lock(&p->prog->dead);
 	if (p->prog->dead_philo)
-		return ;
+	{
+		pthread_mutex_unlock(&p->prog->dead);
+			return ;
+	}
+	pthread_mutex_unlock(&p->prog->dead);
 	print_status(p, e_sleep);
 	usleep(p->prog->ts);
 }

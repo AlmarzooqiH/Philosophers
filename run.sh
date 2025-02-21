@@ -1,2 +1,2 @@
 !/bin/bash
-make re ; clear ; valgrind --tool=helgrind -s --log-file="out.log" ./philo 2 150 300 400
+make re ; clear ; valgrind --tool=helgrind -s --log-file="out.log" ./philo 5 500 250 250
