@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 07:43:09 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/21 15:05:56 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/02/23 14:59:42 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define FTIPM "Failed to init print mutex\n\0"
 # define FTIEM "Failed to init eat mutex\n\0"
 # define FTIDM "Failed to init dead mutex\n\0"
+# define FTIMM "Failed to init meal mutex\n\0"
 
 /* Threads Errors */
 # define FTT "Failed to start threads\n\0"

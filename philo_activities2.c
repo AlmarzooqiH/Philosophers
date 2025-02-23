@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_activities2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:39:26 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/21 15:55:40 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/02/23 15:22:38 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	think(t_philo *p)
 	if (p->prog->dead_philo)
 	{
 		pthread_mutex_unlock(&p->prog->dead);
-			return ;
+		return ;
 	}
 	pthread_mutex_unlock(&p->prog->dead);
 	print_status(p, e_think);
@@ -42,7 +42,7 @@ void	dlf(t_philo *p)
 	if (p->prog->dead_philo)
 	{
 		pthread_mutex_unlock(&p->prog->dead);
-			return ;
+		return ;
 	}
 	pthread_mutex_unlock(&p->prog->dead);
 	pthread_mutex_lock(&p->prog->mforks[p->id]);
@@ -64,7 +64,7 @@ void	drf(t_philo *p)
 	if (p->prog->dead_philo)
 	{
 		pthread_mutex_unlock(&p->prog->dead);
-			return ;
+		return ;
 	}
 	pthread_mutex_unlock(&p->prog->dead);
 	f_pos = (p->id + 1) % p->prog->n_philo;

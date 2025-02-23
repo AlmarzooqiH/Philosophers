@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_activites.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/21 16:14:02 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/02/23 15:22:12 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	plf(t_philo *p)
 	if (p->prog->dead_philo)
 	{
 		pthread_mutex_unlock(&p->prog->dead);
-			return ;
+		return ;
 	}
 	pthread_mutex_unlock(&p->prog->dead);
 	picked = 0;
@@ -82,7 +82,7 @@ void	prf(t_philo *p)
 	if (p->prog->dead_philo)
 	{
 		pthread_mutex_unlock(&p->prog->dead);
-			return ;
+		return ;
 	}
 	pthread_mutex_unlock(&p->prog->dead);
 	picked = 0;
@@ -114,11 +114,13 @@ void	eat(t_philo *p)
 	{
 		pthread_mutex_unlock(&p->prog->dead);
 		pthread_mutex_unlock(&p->prog->eat);
-			return ;
+		return ;
 	}
 	pthread_mutex_unlock(&p->prog->dead);
+	pthread_mutex_lock(&p->meal);
 	p->last_meal = gtms();
 	p->n_meals++;
+	pthread_mutex_unlock(&p->meal);
 	print_status(p, e_eat);
 	usleep(p->prog->te);
 }
@@ -134,7 +136,7 @@ void	psleep(t_philo *p)
 	if (p->prog->dead_philo)
 	{
 		pthread_mutex_unlock(&p->prog->dead);
-			return ;
+		return ;
 	}
 	pthread_mutex_unlock(&p->prog->dead);
 	print_status(p, e_sleep);

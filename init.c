@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/21 16:23:12 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/02/23 15:00:02 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	free_prog(t_prog *prog)
 		{
 			prog->philo[i].id = i;
 			prog->philo[i].n_meals = 0;
+			pthread_mutex_destroy(&prog->philo[i].meal);
 			i++;
 		}
 		free(prog->philo);
@@ -109,6 +110,8 @@ int	init_philo(t_prog *prog)
 		prog->philo[i].id = i;
 		prog->philo[i].n_meals = 0;
 		prog->philo[i].prog = prog;
+		if (pthread_mutex_init(&prog->philo[i].meal, NULL))
+			return (printf("%s", FTIMM), free_prog(prog), 1);
 		i++;
 	}
 	return (0);

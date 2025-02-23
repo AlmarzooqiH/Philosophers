@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/21 16:32:53 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/02/23 22:23:00 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ int	is_dead(t_prog *prog)
 	i = 0;
 	while (i < prog->n_philo)
 	{
+		pthread_mutex_lock(&prog->philo[i].meal);
 		if ((gtms() - prog->philo[i].last_meal) >= prog->td)
-			return (prog->dead_philo = 1,
-				print_status(&prog->philo[i], e_dead),
+			return (print_status(&prog->philo[i], e_dead),
+				pthread_mutex_unlock(&prog->philo[i].meal),
 				pthread_mutex_unlock(&prog->dead), 1);
+		pthread_mutex_unlock(&prog->philo[i].meal);
 		i++;
 	}
 	pthread_mutex_unlock(&prog->dead);
@@ -43,11 +45,20 @@ int	all_ate(t_prog *prog)
 	count = 0;
 	while (i < prog->n_philo)
 	{
+		pthread_mutex_lock(&prog->philo[i].meal);
 		if (prog->philo[i].n_meals == prog->neat)
 			count++;
+		pthread_mutex_unlock(&prog->philo[i].meal);
 		i++;
 	}
-	return (prog->n_philo == count);
+	if (prog->n_philo == count)
+	{
+		pthread_mutex_lock(&prog->dead);
+		prog->dead_philo = 1;
+		pthread_mutex_unlock(&prog->dead);
+		return (1);
+	}
+	return (0);
 }
 
 void	*monitor(void *arg)
@@ -55,13 +66,11 @@ void	*monitor(void *arg)
 	t_prog	*prog;
 
 	prog = (t_prog *)arg;
-	usleep(TTT * 2000);
-	while (!prog->dead_philo)
+	while (1)
 	{
-		if (prog->neat > 0 && all_ate(prog))
-			return (prog->dead_philo = 1, NULL);
-		is_dead(prog);
-		usleep(TTT * 100);
+		if (is_dead(prog) || (prog->neat > 0 && all_ate(prog)))
+			break ;
+		usleep(TTT * 1000);
 	}
 	return (NULL);
 }
@@ -119,7 +128,7 @@ int	start_threads(t_prog *prog)
 	while (i < prog->n_philo)
 	{
 		if (pthread_join(prog->philo[i].tid, NULL))
-		return (printf("%s", FTJT), 0);
+			return (printf("%s", FTJT), 0);
 		i++;
 	}
 	if (pthread_join(prog->monitor, NULL))
