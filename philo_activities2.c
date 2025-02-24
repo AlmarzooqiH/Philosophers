@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:39:26 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/24 12:47:42 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/24 17:51:27 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	drf(t_philo *p)
  * if all the philosophers have eaten the required number of meals.
  * @param prog The program struct.
  * @return 1 If all the philos have eaten the required number of meals.
- * @return 0 If not all the philos have eaten the required number of meals.
+ * @return 0 If not all the philo's have eaten the required number of meals.
  */
 int	all_ate(t_prog *prog)
 {

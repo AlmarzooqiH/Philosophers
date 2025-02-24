@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/24 13:16:56 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/24 17:46:25 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,20 +73,18 @@ void	*simu(void *arg)
 
 	p = (t_philo *)arg;
 	if (p->prog->n_philo == 1)
+		return (plf(p), usleep(TTT * 1000), NULL);
+	while (1)
 	{
-		plf(p);
-		usleep(TTT * 1000);
-		return (NULL);
-	}
-	while (!p->prog->dead_philo)
-	{
+		pthread_mutex_lock(&p->prog->dead);
+		if (p->prog->dead_philo == 1)
+			return (pthread_mutex_unlock(&p->prog->dead), NULL);
+		pthread_mutex_unlock(&p->prog->dead);
 		if (p->prog->neat > 0 && p->n_meals == p->prog->neat)
 			return (NULL);
 		plf(p);
 		prf(p);
-		pthread_mutex_lock(&p->prog->eat);
 		eat(p);
-		pthread_mutex_unlock(&p->prog->eat);
 		dlf(p);
 		drf(p);
 		psleep(p);

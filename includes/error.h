@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 07:43:09 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/23 14:59:42 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/24 16:29:59 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # define FTIP "Failed to init t_philo\n\0"
 # define FTIM "Failed to init mutex fork\n\0"
 # define FTIPM "Failed to init print mutex\n\0"
-# define FTIEM "Failed to init eat mutex\n\0"
 # define FTIDM "Failed to init dead mutex\n\0"
 # define FTIMM "Failed to init meal mutex\n\0"
 

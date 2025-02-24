@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:18:08 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/23 14:58:26 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/24 16:28:40 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ typedef struct s_prog
 	pthread_mutex_t	*mforks;
 	pthread_mutex_t	print;
 	pthread_mutex_t	dead;
-	pthread_mutex_t	eat;
 	t_philo			*philo;
 }	t_prog;
 

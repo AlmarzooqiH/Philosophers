@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/24 13:15:26 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/24 17:51:04 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ void	eat(t_philo *p)
 	if (p->prog->dead_philo)
 	{
 		pthread_mutex_unlock(&p->prog->dead);
-		pthread_mutex_unlock(&p->prog->eat);
 		return ;
 	}
 	pthread_mutex_unlock(&p->prog->dead);
