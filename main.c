@@ -6,12 +6,19 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/23 22:23:00 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/24 13:16:56 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/philosophers.h"
 
+/**
+ * @brief This function will be executed by the monitor thread where it will ch
+ * eck if one of the philosophers has died or not.
+ * @param prog The program struct.
+ * @return 1 If one of the philosophers has died.
+ * @return 0 If none of the philosophers has died.
+ */
 int	is_dead(t_prog *prog)
 {
 	int		i;
@@ -36,31 +43,11 @@ int	is_dead(t_prog *prog)
 	return (0);
 }
 
-int	all_ate(t_prog *prog)
-{
-	int	i;
-	int	count;
-
-	i = 0;
-	count = 0;
-	while (i < prog->n_philo)
-	{
-		pthread_mutex_lock(&prog->philo[i].meal);
-		if (prog->philo[i].n_meals == prog->neat)
-			count++;
-		pthread_mutex_unlock(&prog->philo[i].meal);
-		i++;
-	}
-	if (prog->n_philo == count)
-	{
-		pthread_mutex_lock(&prog->dead);
-		prog->dead_philo = 1;
-		pthread_mutex_unlock(&prog->dead);
-		return (1);
-	}
-	return (0);
-}
-
+/**
+ * @brief This function is the routine of the monitor thread.
+ * @param arg The program struct.
+ * @return NULL
+ */
 void	*monitor(void *arg)
 {
 	t_prog	*prog;
@@ -75,6 +62,11 @@ void	*monitor(void *arg)
 	return (NULL);
 }
 
+/**
+ * @brief This function is the routine of the philosopher thread.
+ * @param arg The philosopher struct.
+ * @return NULL
+ */
 void	*simu(void *arg)
 {
 	t_philo	*p;
