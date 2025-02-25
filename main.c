@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/24 17:46:25 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/25 21:06:05 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ int	is_dead(t_prog *prog)
 	{
 		pthread_mutex_lock(&prog->philo[i].meal);
 		if ((gtms() - prog->philo[i].last_meal) >= prog->td)
-			return (print_status(&prog->philo[i], e_dead),
+			return (prog->dead_philo = 1,
+				print_status(&prog->philo[i], e_dead),
 				pthread_mutex_unlock(&prog->philo[i].meal),
 				pthread_mutex_unlock(&prog->dead), 1);
 		pthread_mutex_unlock(&prog->philo[i].meal);
@@ -57,7 +58,7 @@ void	*monitor(void *arg)
 	{
 		if (is_dead(prog) || (prog->neat > 0 && all_ate(prog)))
 			break ;
-		usleep(TTT * 1000);
+		usleep(TTT * 100);
 	}
 	return (NULL);
 }
