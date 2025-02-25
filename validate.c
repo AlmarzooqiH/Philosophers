@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/10 20:51:21 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/18 23:28:11 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/25 15:31:07 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	validate(int ac, char **av)
 				return (printf("%s", EA), 1);
 			if (validate2(av[i]))
 				return (1);
-			if (ft_atol(av[i]) < 0 || ft_atol(av[i]) > INT_MAX)
+			if (ft_atol(av[i]) <= 0 || ft_atol(av[i]) > INT_MAX)
 				return (printf("%s", OFB), 1);
 			i++;
 		}
