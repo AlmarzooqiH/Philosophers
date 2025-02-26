@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/26 18:07:54 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/27 00:40:21 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ int	start_threads(t_prog *prog)
 	prog->time = gtms();
 	while (i < prog->n_philo)
 	{
+		prog->philo[i].last_meal = prog->time;
 		if (pthread_create(&prog->philo[i].tid, NULL, simu, &prog->philo[i]))
 			return (printf("%s", FTT), 0);
 		i++;
