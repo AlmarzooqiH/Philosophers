@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/24 17:51:04 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/26 11:53:24 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,18 @@
  */
 void	print_status(t_philo *p, int activity)
 {
+	if (activity == e_dead)
+	{
+		printf("%ld %ld %s", gtms() - p->prog->time, p->id, DEAD);
+		return ;
+	}
+	pthread_mutex_lock(&p->prog->dead);
+	if (p->prog->dead_philo == 1)
+	{
+		pthread_mutex_unlock(&p->prog->dead);
+		return ;
+	}
+	pthread_mutex_unlock(&p->prog->dead);
 	pthread_mutex_lock(&p->prog->print);
 	if (activity == e_pick_up_fork)
 		printf("%ld %ld %s", (gtms() - p->prog->time), p->id, TF);
@@ -29,8 +41,6 @@ void	print_status(t_philo *p, int activity)
 		printf("%ld %ld %s", gtms() - p->prog->time, p->id, SLP);
 	else if (activity == e_think)
 		printf("%ld %ld %s", gtms() - p->prog->time, p->id, TK);
-	else if (activity == e_dead)
-		printf("%ld %ld %s", gtms() - p->prog->time, p->id, DEAD);
 	pthread_mutex_unlock(&p->prog->print);
 }
 
@@ -44,16 +54,16 @@ void	plf(t_philo *p)
 {
 	int	picked;
 
-	pthread_mutex_lock(&p->prog->dead);
-	if (p->prog->dead_philo)
-	{
-		pthread_mutex_unlock(&p->prog->dead);
-		return ;
-	}
-	pthread_mutex_unlock(&p->prog->dead);
 	picked = 0;
 	while (!picked)
 	{
+		pthread_mutex_lock(&p->prog->dead);
+		if (p->prog->dead_philo)
+		{
+			pthread_mutex_unlock(&p->prog->dead);
+			return ;
+		}
+		pthread_mutex_unlock(&p->prog->dead);
 		pthread_mutex_lock(&p->prog->mforks[p->id]);
 		if (p->prog->forks[p->id] == 0)
 		{
@@ -78,17 +88,17 @@ void	prf(t_philo *p)
 	int	picked;
 	int	f_pos;
 
-	pthread_mutex_lock(&p->prog->dead);
-	if (p->prog->dead_philo)
-	{
-		pthread_mutex_unlock(&p->prog->dead);
-		return ;
-	}
-	pthread_mutex_unlock(&p->prog->dead);
 	picked = 0;
 	f_pos = (p->id + 1) % p->prog->n_philo;
 	while (!picked)
 	{
+		pthread_mutex_lock(&p->prog->dead);
+		if (p->prog->dead_philo)
+		{
+			pthread_mutex_unlock(&p->prog->dead);
+			return ;
+		}
+		pthread_mutex_unlock(&p->prog->dead);
 		pthread_mutex_lock(&p->prog->mforks[f_pos]);
 		if (p->prog->forks[f_pos] == 0)
 		{

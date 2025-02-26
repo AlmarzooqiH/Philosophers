@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:39:26 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/24 17:51:27 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/26 11:33:45 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,5 +102,21 @@ int	all_ate(t_prog *prog)
 		pthread_mutex_unlock(&prog->dead);
 		return (1);
 	}
+	return (0);
+}
+
+/**
+ * @brief This function will check if the philosopher has eaten the required
+ * number of meals.
+ * @param p The philosopher.
+ * @return 1 If the philosopher has eaten the required number of meals.
+ * @return 0 If the philosopher has not eaten the required number of meals.
+ */
+int	is_full(t_philo *p)
+{
+	pthread_mutex_lock(&p->meal);
+	if (p->prog->neat > 0 && p->n_meals == p->prog->neat)
+		return (pthread_mutex_unlock(&p->meal), 1);
+	pthread_mutex_unlock(&p->meal);
 	return (0);
 }
