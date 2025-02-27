@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/26 11:34:04 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/27 12:40:08 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 # include "struct.h"
 # include "error.h"
 
-# define TF "Taken a fork\n"
-# define EAT "Eating\n"
-# define SLP "Sleeping\n"
-# define TK "Thinking\n"
-# define DEAD "Died\n"
+# define TF "has taken a fork\n"
+# define EAT "is eating\n"
+# define SLP "is sleeping\n"
+# define TK "is thinking\n"
+# define DEAD "died\n"
 
 //Time To Think
 # define TTT 150
