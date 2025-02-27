@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/27 12:40:08 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/28 02:58:41 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ void	psleep(t_philo *p);
 void	think(t_philo *p);
 void	prf(t_philo *p);
 void	drf(t_philo *p);
+void	my_usleep(long time);
 #endif

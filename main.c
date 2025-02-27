@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/27 00:40:21 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/28 03:03:12 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	*monitor(void *arg)
 	{
 		if (is_dead(prog) || (prog->neat > 0 && all_ate(prog)))
 			break ;
-		usleep(TTT * 100);
+		usleep(TTT);
 	}
 	return (NULL);
 }
@@ -76,15 +76,13 @@ void	*simu(void *arg)
 	if (p->id % 2 == 1)
 		usleep(TTT);
 	if (p->prog->n_philo == 1)
-		return (plf(p), usleep(TTT * 1000), NULL);
+		return (plf(p), usleep(TTT), NULL);
 	while (1)
 	{
 		pthread_mutex_lock(&p->prog->dead);
 		if (p->prog->dead_philo == 1)
 			return (pthread_mutex_unlock(&p->prog->dead), NULL);
 		pthread_mutex_unlock(&p->prog->dead);
-		if (is_full(p))
-			return (NULL);
 		plf(p);
 		prf(p);
 		eat(p);
