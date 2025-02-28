@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/28 19:36:14 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/28 23:47:26 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	*simu(void *arg)
 
 	p = (t_philo *)arg;
 	if (p->id % 2 == 1)
-		usleep(TTT);
+		usleep(TTW);
 	if (p->prog->n_philo == 1)
 		return (plf(p), usleep(p->prog->td), NULL);
 	while (1)

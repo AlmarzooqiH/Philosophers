@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_activites.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/28 19:24:46 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/28 23:21:26 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	plf(t_philo *p)
 		}
 		pthread_mutex_unlock(&p->prog->mforks[p->id]);
 		if (!picked)
-			usleep(TTT);
+			usleep(TTW);
 	}
 }
 
@@ -108,7 +108,7 @@ void	prf(t_philo *p)
 		}
 		pthread_mutex_unlock(&p->prog->mforks[f_pos]);
 		if (!picked)
-			usleep(TTT);
+			usleep(TTW);
 	}
 }
 
@@ -126,11 +126,11 @@ void	eat(t_philo *p)
 		return ;
 	}
 	pthread_mutex_unlock(&p->prog->dead);
+	print_status(p, e_eat);
 	pthread_mutex_lock(&p->meal);
 	p->last_meal = gtms();
 	p->n_meals++;
 	pthread_mutex_unlock(&p->meal);
-	print_status(p, e_eat);
 	usleep(p->prog->te);
 }
 

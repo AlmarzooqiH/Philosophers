@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/28 19:32:54 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/28 23:22:10 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # define TK "is thinking\n"
 # define DEAD "died\n"
 
-//Time To Think
-# define TTT 150
+//Time To Wait
+# define TTW 150
 
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
@@ -59,4 +59,5 @@ void	psleep(t_philo *p);
 void	think(t_philo *p);
 void	prf(t_philo *p);
 void	drf(t_philo *p);
+// void    my_usleep(long time, t_prog *prog);
 #endif

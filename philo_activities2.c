@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_activities2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:39:26 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/28 03:02:08 by hamad            ###   ########.fr       */
+/*   Updated: 2025/02/28 23:21:36 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	think(t_philo *p)
 	}
 	pthread_mutex_unlock(&p->prog->dead);
 	print_status(p, e_think);
-	usleep(TTT);
 }
 
 /**
