@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 05:55:48 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/02 01:54:17 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/03/02 02:48:16 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,18 @@ long	gtms(void)
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
 }
 
-void	my_usleep(long time, t_prog *prog)
+/**
+ * @brief This function will sleep for a given time in mili-seconds.
+ * @param tims The time to sleep in mili-seconds.
+ * @param prog The program struct.
+ * @return void
+ */
+void	my_usleep(long tims, t_prog *prog)
 {
 	long	start;
 
 		start = gtms();
-		while ((gtms() - start) < time)
+		while ((gtms() - start) < tims)
 		{
 			pthread_mutex_lock(&prog->dead);
 			if (prog->dead_philo)
