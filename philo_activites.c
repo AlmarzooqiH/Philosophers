@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/01 23:53:48 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/03/02 01:56:31 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	eat(t_philo *p)
 	p->n_meals++;
 	p->last_meal = gtms();
 	pthread_mutex_unlock(&p->meal);
-	usleep(p->prog->te);
+	my_usleep(p->prog->te, p->prog);
 }
 
 /**
@@ -149,5 +149,5 @@ void	psleep(t_philo *p)
 	}
 	pthread_mutex_unlock(&p->prog->dead);
 	print_status(p, e_sleep);
-	usleep(p->prog->ts);
+	my_usleep(p->prog->ts, p->prog);
 }

@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/02 00:42:22 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/03/02 01:54:08 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ void	*simu(void *arg)
 
 	p = (t_philo *)arg;
 	if (p->id % 2 == 1)
-		usleep(TTW);
+		my_usleep(TTW, p->prog);
 	if (p->prog->n_philo == 1)
-		return (plf(p), usleep(p->prog->td), NULL);
+		return (plf(p), my_usleep(p->prog->td, p->prog), NULL);
 	while (1)
 	{
 		pthread_mutex_lock(&p->prog->dead);

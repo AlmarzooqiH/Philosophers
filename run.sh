@@ -1,2 +1,2 @@
 !/bin/bash
-make re ; clear ; ./philo 5 510 250 250 > out ; make fclean ; clear
+make re ; clear ; ./philo 2 310 200 200 > out ; make fclean ; clear

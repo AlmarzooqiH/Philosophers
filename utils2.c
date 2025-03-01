@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 05:55:48 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/01 23:53:35 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/03/02 01:54:17 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,22 @@ long	gtms(void)
 	if (gettimeofday(&tv, NULL) == -1)
 		return (printf("Failed to get time\n"), -1);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
+}
+
+void	my_usleep(long time, t_prog *prog)
+{
+	long	start;
+
+		start = gtms();
+		while ((gtms() - start) < time)
+		{
+			pthread_mutex_lock(&prog->dead);
+			if (prog->dead_philo)
+			{
+				pthread_mutex_unlock(&prog->dead);
+				return ;
+			}
+			pthread_mutex_unlock(&prog->dead);
+			usleep(10);
+		}
 }

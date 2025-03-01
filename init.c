@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
+/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/27 00:40:12 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/02 01:49:51 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ int	init(int ac, char **av, t_prog *prog)
 
 	prog->n_philo = ft_atol(av[1]);
 	prog->td = ft_atol(av[2]);
-	prog->te = ft_atol(av[3]) * 1000;
-	prog->ts = ft_atol(av[4]) * 1000;
+	prog->te = ft_atol(av[3]);
+	prog->ts = ft_atol(av[4]);
 	if (ac == 6)
 		prog->neat = ft_atol(av[5]);
 	else
