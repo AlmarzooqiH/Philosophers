@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/28 23:22:10 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/03/01 23:53:52 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,4 @@ void	psleep(t_philo *p);
 void	think(t_philo *p);
 void	prf(t_philo *p);
 void	drf(t_philo *p);
-// void    my_usleep(long time, t_prog *prog);
 #endif

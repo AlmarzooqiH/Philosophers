@@ -6,7 +6,7 @@
 /*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/28 23:47:26 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/03/02 00:42:22 by hamalmar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,6 @@ int	is_dead(t_prog *prog)
 	int		i;
 
 	pthread_mutex_lock(&prog->dead);
-	if (prog->n_philo == 1)
-		return (prog->dead_philo = 1,
-			print_status(&prog->philo[0], e_dead),
-			pthread_mutex_unlock(&prog->dead), 1);
 	i = 0;
 	while (i < prog->n_philo)
 	{
@@ -58,6 +54,7 @@ void	*monitor(void *arg)
 	{
 		if (is_dead(prog) || (prog->neat > 0 && all_ate(prog)))
 			break ;
+		usleep(10);
 	}
 	return (NULL);
 }
