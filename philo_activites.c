@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/04 22:25:23 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/04 23:48:17 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	print_status(t_philo *p, int activity)
 {
 	if (activity == e_dead)
 	{
+		pthread_mutex_lock(&p->prog->print);
 		printf("%ld %ld %s", gtms() - p->prog->time, p->id, DEAD);
+		pthread_mutex_unlock(&p->prog->print);
 		return ;
 	}
 	pthread_mutex_lock(&p->prog->dead);
