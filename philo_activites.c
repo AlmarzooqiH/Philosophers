@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_activites.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/02 01:56:31 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/03/04 22:25:23 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,22 +26,17 @@ void	print_status(t_philo *p, int activity)
 		return ;
 	}
 	pthread_mutex_lock(&p->prog->dead);
-	if (p->prog->dead_philo == 1)
-	{
-		pthread_mutex_unlock(&p->prog->dead);
-		return ;
-	}
-	pthread_mutex_unlock(&p->prog->dead);
 	pthread_mutex_lock(&p->prog->print);
-	if (activity == e_pick_up_fork)
+	if (p->prog->dead_philo != 1 && activity == e_pick_up_fork)
 		printf("%ld %ld %s", (gtms() - p->prog->time), p->id, TF);
-	else if (activity == e_eat)
+	else if (p->prog->dead_philo != 1 && activity == e_eat)
 		printf("%ld %ld %s", gtms() - p->prog->time, p->id, EAT);
-	else if (activity == e_sleep)
+	else if (p->prog->dead_philo != 1 && activity == e_sleep)
 		printf("%ld %ld %s", gtms() - p->prog->time, p->id, SLP);
-	else if (activity == e_think)
+	else if (p->prog->dead_philo != 1 && activity == e_think)
 		printf("%ld %ld %s", gtms() - p->prog->time, p->id, TK);
 	pthread_mutex_unlock(&p->prog->print);
+	pthread_mutex_unlock(&p->prog->dead);
 }
 
 /**
@@ -58,7 +53,7 @@ void	plf(t_philo *p)
 	while (!picked)
 	{
 		pthread_mutex_lock(&p->prog->dead);
-		if (p->prog->dead_philo)
+		if (p->prog->dead_philo == 1)
 		{
 			pthread_mutex_unlock(&p->prog->dead);
 			return ;
@@ -93,7 +88,7 @@ void	prf(t_philo *p)
 	while (!picked)
 	{
 		pthread_mutex_lock(&p->prog->dead);
-		if (p->prog->dead_philo)
+		if (p->prog->dead_philo == 1)
 		{
 			pthread_mutex_unlock(&p->prog->dead);
 			return ;
@@ -120,7 +115,7 @@ void	prf(t_philo *p)
 void	eat(t_philo *p)
 {
 	pthread_mutex_lock(&p->prog->dead);
-	if (p->prog->dead_philo)
+	if (p->prog->dead_philo == 1)
 	{
 		pthread_mutex_unlock(&p->prog->dead);
 		return ;
@@ -142,7 +137,7 @@ void	eat(t_philo *p)
 void	psleep(t_philo *p)
 {
 	pthread_mutex_lock(&p->prog->dead);
-	if (p->prog->dead_philo)
+	if (p->prog->dead_philo == 1)
 	{
 		pthread_mutex_unlock(&p->prog->dead);
 		return ;

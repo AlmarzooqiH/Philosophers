@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 05:55:48 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/03 12:23:33 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/04 22:35:35 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	my_usleep(long tims, t_prog *prog)
 	while ((gtms() - start) < tims)
 	{
 		pthread_mutex_lock(&prog->dead);
-		if (prog->dead_philo)
+		if (prog->dead_philo == 1)
 		{
 			pthread_mutex_unlock(&prog->dead);
 			return ;
