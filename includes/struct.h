@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 16:18:08 by hamad             #+#    #+#             */
-/*   Updated: 2025/02/24 16:28:40 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/06 03:03:07 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_philo
  * @var	td The time to die (time in milliseconds).
  * @var te The time to eat (time in milliseconds).
  * @var ts The time to sleep (time in milliseconds).
- * @var neat The number of eatings. (optional)
+ * @var neat The number of meals each philosopher must eat. (optional)
  * @var time The time since the start of the simulation.
  * @var dead_philo This will be 1 if we found a dead philosopher and will end
  * 	the simulation.
