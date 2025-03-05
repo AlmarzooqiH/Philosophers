@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:04 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/02 14:22:21 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/05 16:00:59 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int		init(int ac, char **av, t_prog *prog);
 int		init_prog_mutex(t_prog *prog);
 void	destroy_mutex(t_prog *prog);
 int		is_dead(t_prog *prog);
+int     check_dead(t_prog *prog);
 int		all_ate(t_prog *prog);
 int		ft_isonlyspace(const char *s);
 void	*simu(void *arg);

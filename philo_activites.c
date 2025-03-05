@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/04 23:48:17 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/05 16:05:50 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,8 @@ void	plf(t_philo *p)
 	picked = 0;
 	while (!picked)
 	{
-		pthread_mutex_lock(&p->prog->dead);
-		if (p->prog->dead_philo == 1)
-		{
-			pthread_mutex_unlock(&p->prog->dead);
+		if (check_dead(p->prog))
 			return ;
-		}
-		pthread_mutex_unlock(&p->prog->dead);
 		pthread_mutex_lock(&p->prog->mforks[p->id]);
 		if (p->prog->forks[p->id] == 0)
 		{
@@ -89,13 +84,8 @@ void	prf(t_philo *p)
 	f_pos = (p->id + 1) % p->prog->n_philo;
 	while (!picked)
 	{
-		pthread_mutex_lock(&p->prog->dead);
-		if (p->prog->dead_philo == 1)
-		{
-			pthread_mutex_unlock(&p->prog->dead);
+		if (check_dead(p->prog))
 			return ;
-		}
-		pthread_mutex_unlock(&p->prog->dead);
 		pthread_mutex_lock(&p->prog->mforks[f_pos]);
 		if (p->prog->forks[f_pos] == 0)
 		{
@@ -116,13 +106,8 @@ void	prf(t_philo *p)
  */
 void	eat(t_philo *p)
 {
-	pthread_mutex_lock(&p->prog->dead);
-	if (p->prog->dead_philo == 1)
-	{
-		pthread_mutex_unlock(&p->prog->dead);
+	if (check_dead(p->prog))
 		return ;
-	}
-	pthread_mutex_unlock(&p->prog->dead);
 	print_status(p, e_eat);
 	pthread_mutex_lock(&p->meal);
 	p->n_meals++;
@@ -138,13 +123,8 @@ void	eat(t_philo *p)
  */
 void	psleep(t_philo *p)
 {
-	pthread_mutex_lock(&p->prog->dead);
-	if (p->prog->dead_philo == 1)
-	{
-		pthread_mutex_unlock(&p->prog->dead);
+	if (check_dead(p->prog))
 		return ;
-	}
-	pthread_mutex_unlock(&p->prog->dead);
 	print_status(p, e_sleep);
 	my_usleep(p->prog->ts, p->prog);
 }
