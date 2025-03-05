@@ -11,7 +11,7 @@ This project is where we have to simulate the famous dining philosophers problem
 - Avoid race conditions
  
 # Approach
-To begin with i have 2 types of a philosopher thread and a monitor thread.
+To begin with i have 2 types of threads, a philosopher thread and a monitor thread.
 
 - Monitor thread: The monitor thread will check for 2 things only, it will check if there is a dead philosopher id so it will set the dead_philo flag to 1 ```prog->dead_philo = 1``` and if the number of meals was also provided with the input it will check if all of the philosophers have eaten their meals if so it will also set the dead_philo flag to 1 ```prog->dead_philo = 1``` and it will end the simulation.
 
