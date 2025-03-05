@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 22:39:26 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/05 16:02:19 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/06 03:01:41 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
  */
 void	think(t_philo *p)
 {
-	if (check_dead(p->prog))
+	if (check_dead(p->prog) == 1)
 		return ;
 	print_status(p, e_think);
 }
@@ -32,7 +32,7 @@ void	think(t_philo *p)
  */
 void	dlf(t_philo *p)
 {
-	if (check_dead(p->prog))
+	if (check_dead(p->prog) == 1)
 		return ;
 	pthread_mutex_lock(&p->prog->mforks[p->id]);
 	p->prog->forks[p->id] = 0;
@@ -49,7 +49,7 @@ void	drf(t_philo *p)
 {
 	int	f_pos;
 
-	if (check_dead(p->prog))
+	if (check_dead(p->prog) == 1)
 		return ;
 	f_pos = (p->id + 1) % p->prog->n_philo;
 	pthread_mutex_lock(&p->prog->mforks[f_pos]);

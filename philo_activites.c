@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 16:09:12 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/05 16:05:50 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/06 03:01:26 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	plf(t_philo *p)
 	picked = 0;
 	while (!picked)
 	{
-		if (check_dead(p->prog))
+		if (check_dead(p->prog) == 1)
 			return ;
 		pthread_mutex_lock(&p->prog->mforks[p->id]);
 		if (p->prog->forks[p->id] == 0)
@@ -84,7 +84,7 @@ void	prf(t_philo *p)
 	f_pos = (p->id + 1) % p->prog->n_philo;
 	while (!picked)
 	{
-		if (check_dead(p->prog))
+		if (check_dead(p->prog) == 1)
 			return ;
 		pthread_mutex_lock(&p->prog->mforks[f_pos]);
 		if (p->prog->forks[f_pos] == 0)
@@ -106,7 +106,7 @@ void	prf(t_philo *p)
  */
 void	eat(t_philo *p)
 {
-	if (check_dead(p->prog))
+	if (check_dead(p->prog) == 1)
 		return ;
 	print_status(p, e_eat);
 	pthread_mutex_lock(&p->meal);
@@ -123,7 +123,7 @@ void	eat(t_philo *p)
  */
 void	psleep(t_philo *p)
 {
-	if (check_dead(p->prog))
+	if (check_dead(p->prog) == 1)
 		return ;
 	print_status(p, e_sleep);
 	my_usleep(p->prog->ts, p->prog);

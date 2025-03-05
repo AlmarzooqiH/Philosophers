@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/04 23:58:23 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/06 03:33:48 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,8 @@ void	*simu(void *arg)
 		return (plf(p), my_usleep(p->prog->td, p->prog), NULL);
 	while (1)
 	{
-		pthread_mutex_lock(&p->prog->dead);
-		if (p->prog->dead_philo == 1)
-			return (pthread_mutex_unlock(&p->prog->dead), NULL);
-		pthread_mutex_unlock(&p->prog->dead);
+		if (check_dead(p->prog) == 1)
+			break ;
 		plf(p);
 		prf(p);
 		eat(p);
