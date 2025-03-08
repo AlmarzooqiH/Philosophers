@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hamalmar <hamalmar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 10:57:22 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/02 01:49:51 by hamalmar         ###   ########.fr       */
+/*   Updated: 2025/03/08 14:04:35 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,6 @@ int	init_philo(t_prog *prog)
  */
 int	init(int ac, char **av, t_prog *prog)
 {
-	int		i;
-
 	prog->n_philo = ft_atol(av[1]);
 	prog->td = ft_atol(av[2]);
 	prog->te = ft_atol(av[3]);
