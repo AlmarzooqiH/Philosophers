@@ -18,9 +18,11 @@ To begin with i have 2 types of threads, a philosopher thread and a monitor thre
 - Philosopher thread: The first thing we check in the philosopher thread is if there is only 1 philosopher which is a special case since there will be only 1 fork on the table and will to starvation. If there are more than 1 philosopher we will make every odd philosopher to wait for 1ms to avoid deadlocks. The philosopher have 5 states (Trying to pick up a fork, eating, sleeping, dropping the fork, thinking). The way the philosopher picks up the fork is first by locking that fork mutex to avoid race conditions and then will check if it is availale if so he will pick it up and set the status of that fork to 1 ```p->prog->forks[p->id] = 1``` else he will wait for a short time then try to pick that fork again. The way i calculate the position of the left fork is ```p->id```, the right fork is a bit different and is caluclated as the following: ```position = (p->id + 1) % p->prog->n_philo``` where it will ensure that the philosopher will pick up the correct fork. After picking up the forks the philosopher will lock his meal mutex and set the last_meal to the current time: ```p->last_meal = gtms()``` then he will unlock his meal mutex and then sleep for time_to_eat. After he finished eating he sleep 
 
 # Running Instructions
-```make ```
+```
+make 
 
-```./philo [number_of_philosophers] [time_to_die] [time_to_eat] [time_to_sleep] [number_of_meals](Optional)```
+./philo [number_of_philosophers] [time_to_die] [time_to_eat] [time_to_sleep] [number_of_meals](Optional)
+```
 
 # Examples
 
