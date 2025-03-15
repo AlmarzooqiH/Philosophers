@@ -6,7 +6,7 @@
 /*   By: hamad <hamad@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:20:35 by hamad             #+#    #+#             */
-/*   Updated: 2025/03/08 14:21:18 by hamad            ###   ########.fr       */
+/*   Updated: 2025/03/15 14:51:27 by hamad            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	*monitor(void *arg)
 	{
 		if (is_dead(prog) || (prog->neat > 0 && all_ate(prog)))
 			break ;
+		usleep(50);
 	}
 	return (NULL);
 }
